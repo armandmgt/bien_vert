@@ -1,0 +1,13 @@
+one:
+  user: one
+  species: MyString
+  name: MyString
+  watering_interval_days: 9.99
+  last_watered_at: 2025-04-02 19:55:42
+
+two:
+  user: two
+  species: MyString
+  name: MyString
+  watering_interval_days: 9.99
+  last_watered_at: 2025-04-02 19:55:42

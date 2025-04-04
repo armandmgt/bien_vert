@@ -1,0 +1,12 @@
+<div class="w-full">
+  <% content_for :title, "Plante" %>
+
+  <div id="<%= dom_id(@plant) %>" class="min-w-full my-2">
+    <h1 class="text-5xl font-extrabold dark:text-white">Modifier ma plante</h1>
+
+    <%= render "form", plant: @plant %>
+  </div>
+
+  <%= link_to "Voir cette plante", plant_path(@plant) %>
+  <%= link_to "Retour aux plantes", plants_path %>
+</div>

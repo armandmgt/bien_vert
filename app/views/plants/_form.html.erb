@@ -1,0 +1,49 @@
+<%# locals: (plant:) %>
+
+<%= form_with model: plant, class: "max-w-sm mx-auto" do |form| %>
+    <div class="mb-5">
+      <%= form.label :species, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+      <%= form.text_field :species, class: tw_merge("bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500", { "bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500": plant.errors.include?(:species) }) %>
+
+      <% if plant.errors.include?(:species) %>
+        <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+          <span class="font-medium">Oups !</span> <%= plant.errors.full_messages_for(:species).to_sentence %>
+        </p>
+      <% end %>
+    </div>
+
+    <div class="mb-5">
+      <%= form.label :name, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+      <%= form.text_field :name, class: tw_merge("bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500", { "bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500": plant.errors.include?(:name) }) %>
+
+      <% if plant.errors.include?(:name) %>
+        <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+          <span class="font-medium">Oups !</span> <%= plant.errors.full_messages_for(:name).to_sentence %>
+        </p>
+      <% end %>
+    </div>
+
+    <div class="mb-5">
+      <%= form.label :watering_interval_days, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+      <%= form.text_field :watering_interval_days, class: tw_merge("bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500", { "bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500": plant.errors.include?(:watering_interval_days) }) %>
+
+      <% if plant.errors.include?(:watering_interval_days) %>
+        <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+          <span class="font-medium">Oups !</span> <%= plant.errors.full_messages_for(:watering_interval_days).to_sentence %>
+        </p>
+      <% end %>
+    </div>
+
+    <div class="mb-5">
+      <%= form.label :last_watered_at, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+      <%= form.datetime_field :last_watered_at, class: tw_merge("bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500", { "bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500": plant.errors.include?(:last_watered_at) }) %>
+
+      <% if plant.errors.include?(:last_watered_at) %>
+        <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+          <span class="font-medium">Oups !</span> <%= plant.errors.full_messages_for(:last_watered_at).to_sentence %>
+        </p>
+      <% end %>
+    </div>
+
+  <%= form.submit %>
+<% end %>
