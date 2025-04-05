@@ -1,11 +1,8 @@
 class PlantsController < ApplicationController
-  before_action :set_plant, only: %i[ show edit update destroy ]
+  before_action :set_plant, only: %i[ edit update destroy ]
 
   def index
     @plants = Plant.all
-  end
-
-  def show
   end
 
   def new
@@ -47,6 +44,6 @@ class PlantsController < ApplicationController
   end
 
   def plant_params
-    params.require(:plant).permit(:species, :name, :watering_interval_days, :last_watered_at)
+    params.expect plant: [ :species, :name, :watering_interval_days, :last_watered_at ]
   end
 end

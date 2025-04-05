@@ -9,6 +9,7 @@ gem "kamal", require: false
 gem "propshaft"
 gem "puma", ">= 5.0"
 gem "rails", "~> 8.0.2"
+gem "ruby-openai"
 gem "solid_cable"
 gem "solid_cache"
 gem "solid_queue"

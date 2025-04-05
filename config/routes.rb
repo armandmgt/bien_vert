@@ -16,5 +16,6 @@ Rails.application.routes.draw do
   resources :passwords, param: :token
 
   resource :dashboard, only: [ :show ]
-  resources :plants
+  resources :plants, only: [ :index, :new, :edit, :create, :update, :destroy ]
+  resources :recognition_requests, only: [ :show, :new, :create ], param: :species
 end
