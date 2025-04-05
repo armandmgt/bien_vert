@@ -13,10 +13,10 @@ class PlantsController < ApplicationController
   end
 
   def create
-    @plant = Plant.new(plant_params.merge(user: Current.user))
+    @plant = Plant.new(plant_params.merge(user: Current.user, photo: params.dig(:plant, :photo_blob_id)&.then { ActiveStorage::Blob.find(_1) }))
 
     if @plant.save
-      redirect_to @plant, notice: "Plant was successfully created."
+      redirect_to plants_path, notice: "Plant was successfully created."
     else
       flash.now[:alert] = "Plant was not created due to the following errors: #{@plant.errors.full_messages.to_sentence}."
       render :new, status: :unprocessable_entity
@@ -25,7 +25,7 @@ class PlantsController < ApplicationController
 
   def update
     if @plant.update(plant_params)
-      redirect_to @plant, notice: "Plant was successfully updated.", status: :see_other
+      redirect_to plants_path, notice: "Plant was successfully updated.", status: :see_other
     else
       flash.now[:alert] = "Plant was not updated due to the following errors: #{@plant.errors.full_messages.to_sentence}."
       render :edit, status: :unprocessable_entity
@@ -34,7 +34,7 @@ class PlantsController < ApplicationController
 
   def destroy
     @plant.destroy!
-    redirect_to plants_path, notice: "Plant was successfully destroyed.", status: :see_other
+    redirect_to root_path, notice: "Plant was successfully destroyed.", status: :see_other
   end
 
   private
@@ -44,6 +44,6 @@ class PlantsController < ApplicationController
   end
 
   def plant_params
-    params.expect plant: [ :species, :name, :watering_interval_days, :last_watered_at ]
+    params.expect plant: [ :species, :name, :watering_frequency, :last_watered_at ]
   end
 end

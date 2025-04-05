@@ -1,0 +1,52 @@
+<%# locals: (recognition_request:)  %>
+
+<div id="<%= dom_id recognition_request %>" class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+
+  <div class="flex items-center justify-center w-full">
+    <%= image_tag url_for(recognition_request.photo), class: "rounded-t-lg" %>
+  </div>
+
+  <div class="p-5">
+    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+      Identification
+      <%=
+        case recognition_request.state
+        when "pending" then "en attente"
+        when "running" then "en cours"
+        when "completed" then "réussie"
+        when "failed" then "non réussie"
+        end
+      %>
+    </h5>
+
+    <div class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+      <% if recognition_request.completed? %>
+        <ul>
+          <li>
+            Espèce : <span class="font-medium"><%= recognition_request.species %></span>
+          </li>
+
+          <li>
+            Fréquence d’arrosage : <span class="font-medium">Tous les <%= number_to_human recognition_request.watering_frequency %> jours</span>
+          </li>
+        </ul>
+
+      <% elsif recognition_request.failed? %>
+
+        <% if recognition_request.result.key?(:response) %>
+          <%= recognition_request.result[:response] %>
+        <% elsif recognition_request.result.key?(:exception) %>
+          <%= recognition_request.result[:exception] %>
+        <% end %>
+
+        <%= button_to "Retry", recognition_request, params: { recognition_request: { state: "pending" } } %>
+
+      <% end %>
+    </div>
+
+    <% if recognition_request.completed? %>
+      <%= button_to "Ajouter à mes plantes", plants_path, params: { plant: { species: recognition_request.species, watering_frequency: recognition_request.watering_frequency, photo_blob_id: recognition_request.photo.blob.id } }, turbo: false, class: "inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-lime-700 rounded-lg hover:bg-lime-800 focus:ring-4 focus:outline-none focus:ring-lime-300 dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800" %>
+    <% end %>
+  </div>
+
+</div>

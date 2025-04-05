@@ -1,25 +1,46 @@
 class RecognitionRequestsController < ApplicationController
+  before_action :set_recognition_request, only: [ :show, :update ]
+
   def show
+    RecognitionJob.perform_later(@recognition_request) if @recognition_request.pending?
   end
 
   def new
+    @recognition_request = RecognitionRequest.new
   end
 
   def create
-    photo = params.expect(:photo)
+    @recognition_request = RecognitionRequest.new(create_params.merge(user: Current.user))
 
-    photo = ActiveStorage::Blob.create_and_upload!(io: photo, filename: photo.original_filename, content_type: photo.content_type)
-    response = OllamaClient["/api/generate"].post({
-      model: "deepseek-r1:14b",
-      prompt: "This is a photo of a plant, please identify the species of the plant and output only a JSON object containing a single key 'species'.",
-      images: [ Base64.encode64(photo.download) ]
-    }.to_json)
-    llm_output = response.body.split("\n").reduce("") do |llm_output, chunk|
-      llm_output + JSON.parse(chunk)["response"]
+    if @recognition_request.save
+      redirect_to @recognition_request, notice: "Recognition request was successfully created."
+    else
+      flash.now[:alert] = "Recognition request was not created due to the following errors: #{@recognition_request.errors.full_messages.to_sentence}."
+      render :new, status: :unprocessable_entity
     end
-    result = JSON.parse(llm_output.gsub(/(```|json|\n)/, ""), symbolize_names: true)
-    photo.destroy
+  end
 
-    redirect_to recognition_request_path(species: result[:species])
+  def update
+    if @recognition_request.update(update_params)
+      RecognitionJob.perform_later(@recognition_request) if @recognition_request.pending?
+      redirect_to @recognition_request, notice: "Recognition request was successfully updated."
+    else
+      flash.now[:alert] = "Recognition request was not updated due to the following errors: #{@recognition_request.errors.full_messages.to_sentence}."
+      render :show, status: :unprocessable_entity
+    end
+  end
+
+  private
+
+  def set_recognition_request
+    @recognition_request = RecognitionRequest.find(params[:id])
+  end
+
+  def create_params
+    params.expect recognition_request: [ :photo ]
+  end
+
+  def update_params
+    params.expect recognition_request: [ :state, :result ]
   end
 end

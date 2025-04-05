@@ -5,7 +5,7 @@ class CreatePlants < ActiveRecord::Migration[8.0]
 
       t.string :species, null: false
       t.string :name
-      t.decimal :watering_interval_days, null: false
+      t.decimal :watering_frequency, null: false
       t.datetime :last_watered_at
 
       t.timestamps

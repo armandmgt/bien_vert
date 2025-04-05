@@ -7,7 +7,7 @@ fr:
       plant:
         species: Espèce
         name: Nom
-        watering_interval_days: Fréquence d’arrosage
+        watering_frequency: Fréquence d’arrosage
         last_watered_at: Dernier arrosage
     errors:
       messages:

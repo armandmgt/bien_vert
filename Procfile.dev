@@ -1,3 +1,2 @@
 web: bin/rails server -b 0.0.0.0
 css: bin/rails tailwindcss:watch
-ollama: docker run --rm -v ollama:/root/.ollama -p 11434:11434 ollama/ollama serve >/dev/null 2>&1

@@ -18,7 +18,7 @@ class PlantsTest < ApplicationSystemTestCase
     fill_in "Name", with: @plant.name
     fill_in "Species", with: @plant.species
     fill_in "User", with: @plant.user_id
-    fill_in "Watering interval days", with: @plant.watering_interval_days
+    fill_in "Watering interval days", with: @plant.watering_frequency
     click_on "Create Plant"
 
     assert_text "Plant was successfully created"
@@ -33,7 +33,7 @@ class PlantsTest < ApplicationSystemTestCase
     fill_in "Name", with: @plant.name
     fill_in "Species", with: @plant.species
     fill_in "User", with: @plant.user_id
-    fill_in "Watering interval days", with: @plant.watering_interval_days
+    fill_in "Watering interval days", with: @plant.watering_frequency
     click_on "Update Plant"
 
     assert_text "Plant was successfully updated"

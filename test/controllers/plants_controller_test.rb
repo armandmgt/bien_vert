@@ -17,7 +17,7 @@ class PlantsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create plant" do
     assert_difference("Plant.count") do
-      post plants_url, params: { plant: { last_watered_at: @plant.last_watered_at, name: @plant.name, species: @plant.species, user_id: @plant.user_id, watering_interval_days: @plant.watering_interval_days } }
+      post plants_url, params: { plant: { last_watered_at: @plant.last_watered_at, name: @plant.name, species: @plant.species, user_id: @plant.user_id, watering_frequency: @plant.watering_frequency } }
     end
 
     assert_redirected_to plant_url(Plant.last)
@@ -34,7 +34,7 @@ class PlantsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update plant" do
-    patch plant_url(@plant), params: { plant: { last_watered_at: @plant.last_watered_at, name: @plant.name, species: @plant.species, user_id: @plant.user_id, watering_interval_days: @plant.watering_interval_days } }
+    patch plant_url(@plant), params: { plant: { last_watered_at: @plant.last_watered_at, name: @plant.name, species: @plant.species, user_id: @plant.user_id, watering_frequency: @plant.watering_frequency } }
     assert_redirected_to plant_url(@plant)
   end
 
