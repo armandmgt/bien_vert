@@ -5,6 +5,8 @@ class Plant < ApplicationRecord
   validates :species, :watering_frequency, presence: true
 
   def send_watering_reminder
+    return unless last_watered_at.nil? || (last_watered_at + watering_frequency.days).past?
+
     display_name = name || species
     user.subscriptions.each do |subscription|
       Rpush::Webpush::Notification.create!(
@@ -30,6 +32,7 @@ class Plant < ApplicationRecord
         }
       )
     end
+
     Rpush.push if Rails.env.local?
   end
 end
