@@ -7,7 +7,7 @@ servers:
     cmd: bin/jobs
   rpush:
     hosts: [ vps.armandmgt.fr ]
-    cmd: bin/rpush start
+    cmd: bin/rpush start -f
 
 proxy:
   ssl: true

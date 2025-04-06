@@ -5,16 +5,17 @@ class Plant < ApplicationRecord
   validates :species, :watering_frequency, presence: true
 
   def send_watering_reminder
-    name = self.name || species
+    display_name = name || species
     user.subscriptions.each do |subscription|
       Rpush::Webpush::Notification.create!(
         app: Rpush::App.find_by_name("webpush"),
         registration_ids: [ subscription.symbolize_keys ],
         data: {
+          urgency: "normal",
           message: {
             title: "Rappel d’arrosage",
             options: {
-              body: "C’est l’heure d’arroser #{name[0].match?(/[aeiouy]/i) ? "mon" : "ma"} #{name}",
+              body: "C’est l’heure d’arroser #{display_name[0].match?(/[aeiouy]/i) ? "mon" : "ma"} #{display_name}",
               icon: "/icon.png",
               actions: [
                 { action: "view", title: "Voir les plantes" }
