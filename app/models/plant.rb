@@ -17,6 +17,8 @@ class Plant < ApplicationRecord
             options: {
               body: "C’est l’heure d’arroser #{display_name[0].match?(/[aeiouy]/i) ? "mon" : "ma"} #{display_name}",
               icon: "/icon.png",
+              badge: "/icon.png",
+              lang: "fr",
               actions: [
                 { action: "view", title: "Voir les plantes" }
               ],

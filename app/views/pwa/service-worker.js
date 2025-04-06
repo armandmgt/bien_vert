@@ -14,28 +14,20 @@ self.addEventListener("push", event => {
 })
 
 self.addEventListener("notificationclick", event => {
-  event.notification.close()
-
   if (!event.notification.data?.path) return
 
   event.waitUntil(
     self.clients.matchAll({ type: "window" }).then((clientList) => {
-      console.log({ clientList })
       for (let i = 0; i < clientList.length; i++) {
-        let client = clientList[i]
-        let clientPathname = (new URL(client.url)).pathname
+        const client = clientList[i]
+        const clientPathname = (new URL(client.url)).pathname
 
         if (clientPathname === event.notification.data.path && "focus" in client) {
           return client.focus()
         }
       }
 
-      if (clientList.length > 0 && "focus" in clientList[0]) {
-        console.log(clientList[0])
-        return clientList[0].navigate(event.notification.data.path)
-          .then(client => client.focus())
-      } else if ("openWindow" in self.clients) {
-        console.log("openWindow")
+      if ("openWindow" in self.clients) {
         return self.clients.openWindow(event.notification.data.path)
       }
     }),

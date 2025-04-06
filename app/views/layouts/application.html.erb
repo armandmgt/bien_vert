@@ -32,11 +32,11 @@
       <%= yield %>
     </main>
   </div>
+
+  <%= render "push_subscription_toast" %>
 <% else %>
   <%= yield %>
 <% end %>
-
-<%= render "push_subscription_toast" %>
 
 </body>
 </html>
