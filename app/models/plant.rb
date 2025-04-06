@@ -27,6 +27,6 @@ class Plant < ApplicationRecord
         }
       )
     end
-    Rpush.push
+    Rpush.push if Rails.env.local?
   end
 end

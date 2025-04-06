@@ -31,9 +31,11 @@ export default class extends Controller {
   async connect() {
     const registration = await navigator.serviceWorker.ready
 
-    const subscription = await registration.pushManager.getSubscription()
-    if (!subscription) {
-      this.requestToastTarget.classList.remove("hidden")
+    if ("pushManager" in registration) {
+      const subscription = await registration.pushManager.getSubscription()
+      if (!subscription) {
+        this.requestToastTarget.classList.remove("hidden")
+      }
     }
   }
 
