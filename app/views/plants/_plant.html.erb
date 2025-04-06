@@ -5,9 +5,7 @@
     <% if plant.photo.attached? %>
       <%= image_tag plant.photo, class: "rounded-t-lg", alt: plant.name || dom_id(plant) %>
     <% else %>
-      <svg class="w-[48px] h-[48px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m3 16 5-7 6 6.5m6.5 2.5L16 13l-4.286 6M14 10h.01M4 19h16a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Z"/>
-      </svg>
+      <%= lucide_icon "image-off", class: "w-10 h-10 text-gray-800 dark:text-white" %>
     <% end %>
   <% end %>
 
@@ -25,9 +23,7 @@
     <%= link_to edit_plant_path(plant), class: "inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-lime-700 rounded-lg hover:bg-lime-800 focus:ring-4 focus:outline-none focus:ring-lime-300 dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800" do %>
       Voir plus
 
-      <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-      </svg>
+      <%= lucide_icon "arrow-right", class: "w-3.5 h-3.5 ms-2" %>
     <% end %>
   </div>
 </div>
