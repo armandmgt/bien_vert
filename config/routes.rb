@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   root "plants#index"
   resource :session
   resources :users, only: [ :new, :edit, :create, :update, :destroy ]
+  resources :push_subscriptions, only: [ :create, :destroy ] do
+    collection { get :vapid_key }
+  end
   resources :passwords, param: :token
 
   resources :plants, only: [ :index, :new, :edit, :create, :update, :destroy ]

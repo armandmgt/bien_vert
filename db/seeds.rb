@@ -7,3 +7,9 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+Rpush::Webpush::App.find_or_create_by(name: "webpush") do |app|
+  vapid_keypair = WebPush.generate_key.to_hash
+  app.certificate = vapid_keypair.merge(subject: "mailto:armand.megrot@gmail.com").to_json
+  app.connections = 1
+end

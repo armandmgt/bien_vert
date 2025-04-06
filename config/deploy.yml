@@ -1,12 +1,13 @@
 service: bien_vert
 image: armandmgt/bien_vert
 servers:
-  web:
-    - vps.armandmgt.fr
+  web: [ vps.armandmgt.fr ]
   job:
-    hosts:
-      - vps.armandmgt.fr
+    hosts: [ vps.armandmgt.fr ]
     cmd: bin/jobs
+  rpush:
+    hosts: [ vps.armandmgt.fr ]
+    cmd: bin/rpush start
 
 proxy:
   ssl: true
