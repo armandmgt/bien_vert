@@ -2,6 +2,14 @@
 
 <div class="max-w-sm mx-auto">
   <%= form_with model: plant, class: "contents" do |form| %>
+    <div class="max-w-sm min-h-40 flex justify-center items-center">
+      <% if plant.photo.attached? %>
+        <%= image_tag plant.photo, class: "rounded-t-lg", alt: plant.name || dom_id(plant) %>
+      <% else %>
+        <%= lucide_icon "image-off", class: "w-10 h-10 text-gray-800 dark:text-white" %>
+      <% end %>
+    </div>
+
     <div class="mb-5">
       <%= form.label :species, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
       <%= form.text_field :species, class: tw_merge("bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500", { "bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500": plant.errors.include?(:species) }) %>
