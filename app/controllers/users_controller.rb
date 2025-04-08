@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   allow_unauthenticated_access
 
   def new
-    redirect_to after_authentication_url if authenticated?
+    redirect_to after_authentication_url, status: :see_other if authenticated?
   end
 
   def edit

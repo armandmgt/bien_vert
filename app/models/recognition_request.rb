@@ -12,7 +12,7 @@ class RecognitionRequest < ApplicationRecord
   store :result, accessors: [ :species, :watering_frequency ]
 
   before_save do |recognition_request|
-    recognition_request.result = nil if recognition_request.state_changed?(to: :pending)
+    recognition_request.result = {} if recognition_request.state_changed?(to: :pending)
   end
 
   broadcasts
