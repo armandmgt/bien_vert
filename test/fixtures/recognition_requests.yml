@@ -2,10 +2,8 @@
 
 one:
   user: one
-  state: MyString
-  result: MyText
+  state: pending
 
 two:
   user: two
-  state: MyString
-  result: MyText
+  state: pending

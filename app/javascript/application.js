@@ -2,3 +2,5 @@
 import "@hotwired/turbo-rails"
 import "flowbite"
 import "controllers"
+
+navigator.serviceWorker.register("/service-worker.js")

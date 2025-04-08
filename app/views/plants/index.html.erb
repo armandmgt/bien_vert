@@ -1,36 +1,43 @@
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-4">
   <% @plants.each do |plant| %>
     <%= render "plant", plant: plant %>
   <% end %>
 </div>
 
-<div data-dial-init class="fixed bottom-6 end-6 group">
-  <div id="speed-dial-menu-text-outside-button-square" class="flex flex-col items-center hidden mb-4 space-y-2">
-    <%= link_to "#", class: "relative w-[52px] h-[52px] flex items-center text-gray-500 bg-white rounded-full border border-gray-200 hover:text-gray-900 dark:border-gray-600 shadow-xs dark:hover:text-white dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400" do %>
-      <svg class="w-5 h-5 mx-auto text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17h10M6 3l1.07554 16.133C7.14558 20.1836 8.01818 21 9.07111 21h5.85779c1.0529 0 1.9255-.8164 1.9956-1.867L18 3H6Zm8 8c0 1.1046-.8954 2-2 2s-2-.8954-2-2c0-1.10457 1.7912-4 2-4 .2088 0 2 2.89543 2 4Z"/>
-      </svg>
+<div data-dial-init class="fixed end-6 bottom-6 group">
+  <div id="speed-dial-menu-default" class="flex flex-col items-center hidden mb-4 space-y-2">
+    <%= link_to "#", data: { "tooltip-target": "tooltip-water", "tooltip-placement": "left" }, class: "flex justify-center items-center w-18 h-18 text-gray-500 hover:text-gray-900 bg-white rounded-full border border-gray-200 dark:border-gray-600 shadow-xs dark:hover:text-white dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400" do %>
+      <%= lucide_icon "cloud-rain", class: "w-5 h-5" %>
 
-      <span class="absolute block mb-px text-sm font-medium -translate-y-1/2 -start-28 top-1/2">
+      <span class="sr-only">
         Arrosage fait !
       </span>
     <% end %>
 
-    <%= link_to new_recognition_request_path, class: "relative w-[52px] h-[52px] flex items-center text-gray-500 bg-white rounded-full border border-gray-200 dark:border-gray-600 hover:text-gray-900 shadow-xs dark:hover:text-white dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400" do %>
-      <svg class="w-5 h-5 mx-auto text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
-      </svg>
+    <div id="tooltip-water" role="tooltip" class="absolute z-10 invisible inline-block w-auto text-nowrap px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
+      Arrosage fait !
+      <div class="tooltip-arrow" data-popper-arrow></div>
+    </div>
 
-      <span class="absolute block mb-px text-sm font-medium -translate-y-1/2 -start-28 top-1/2">
+    <%= link_to new_recognition_request_path, data: { "tooltip-target": "tooltip-add", "tooltip-placement": "left" }, class: "flex justify-center items-center w-18 h-18 text-gray-500 hover:text-gray-900 bg-white rounded-full border border-gray-200 dark:border-gray-600 shadow-xs dark:hover:text-white dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400" do %>
+      <%= lucide_icon "leaf", class: "w-5 h-5" %>
+
+      <span class="sr-only">
         Nouvelle plante
       </span>
     <% end %>
+
+    <div id="tooltip-add" role="tooltip" class="absolute z-10 invisible inline-block w-auto text-nowrap px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
+      Nouvelle plante
+      <div class="tooltip-arrow" data-popper-arrow></div>
+    </div>
   </div>
 
-  <button type="button" data-dial-toggle="speed-dial-menu-text-outside-button-square" aria-controls="speed-dial-menu-text-outside-button-square" aria-expanded="false" class="flex items-center justify-center text-white bg-lime-700 rounded-full w-14 h-14 hover:bg-lime-800 dark:bg-lime-600 dark:hover:bg-lime-700 focus:ring-4 focus:ring-lime-300 focus:outline-none dark:focus:ring-lime-800">
-    <svg class="w-5 h-5 transition-transform group-hover:rotate-45" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-    </svg>
-    <span class="sr-only">Open actions menu</span>
+  <button type="button" data-dial-toggle="speed-dial-menu-default" aria-controls="speed-dial-menu-default" aria-expanded="false" class="flex items-center justify-center text-white bg-lime-700 rounded-full w-20 h-20 hover:bg-lime-800 dark:bg-lime-600 dark:hover:bg-lime-700 focus:ring-4 focus:ring-lime-300 focus:outline-none dark:focus:ring-lime-800">
+    <%= lucide_icon "plus", class: "w-8 h-8 transition-transform group-hover:rotate-45" %>
+
+    <span class="sr-only">
+      Ouvrir les actions rapides
+    </span>
   </button>
 </div>
