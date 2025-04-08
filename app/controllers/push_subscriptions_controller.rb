@@ -8,11 +8,17 @@ class PushSubscriptionsController < ApplicationController
     if Current.user.save
       head :ok
     else
-      head :unprocessable_entity
+      head :unprocessable_content
     end
   end
 
   def destroy
+    Current.user.subscriptions.delete_at params[:id].to_i
+    if Current.user.save
+      head :ok
+    else
+      head :unprocessable_content
+    end
   end
 
   private

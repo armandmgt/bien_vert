@@ -1,0 +1,9 @@
+recognition_request_one_photo:
+  name: photo
+  record: one (RecognitionRequest)
+  blob: recognition_request_one_photo_blob
+
+plant_one_photo:
+  name: photo
+  record: one (Plant)
+  blob: plant_one_photo_blob

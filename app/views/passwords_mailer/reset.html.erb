@@ -1,4 +1,6 @@
 <p>
-  You can reset your password within the next 15 minutes on
-  <%= link_to "this password reset page", edit_password_url(@user.password_reset_token) %>.
+  Cliquez sur le lien ci-dessous pour changer votre mot de passe :
+  <%= link_to edit_password_url(@user.password_reset_token) %>.
+
+  Attention, le lien expire dans 15 minutes.
 </p>

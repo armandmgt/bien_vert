@@ -11,12 +11,12 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "plants#index"
-  resource :session
+  resource :session, only: [ :new, :create, :destroy ]
   resources :users, only: [ :new, :edit, :create, :update, :destroy ]
   resources :push_subscriptions, only: [ :create, :destroy ] do
     collection { get :vapid_key }
   end
-  resources :passwords, param: :token
+  resources :passwords, only: [ :new, :create, :edit, :update ], param: :token
 
   resources :plants, only: [ :index, :new, :edit, :create, :update, :destroy ]
   resources :recognition_requests, only: [ :show, :new, :create, :update ]

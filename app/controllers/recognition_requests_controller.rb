@@ -16,7 +16,7 @@ class RecognitionRequestsController < ApplicationController
       redirect_to @recognition_request, notice: "Recognition request was successfully created."
     else
       flash.now[:alert] = "Recognition request was not created due to the following errors: #{@recognition_request.errors.full_messages.to_sentence}."
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -26,7 +26,7 @@ class RecognitionRequestsController < ApplicationController
       redirect_to @recognition_request, notice: "Recognition request was successfully updated."
     else
       flash.now[:alert] = "Recognition request was not updated due to the following errors: #{@recognition_request.errors.full_messages.to_sentence}."
-      render :show, status: :unprocessable_entity
+      render :show, status: :unprocessable_content
     end
   end
 
