@@ -1,4 +1,7 @@
 production:
+  rpush:
+    command: "Rpush.push"
+    schedule: every seconds
   watering_reminder:
     command: "Plant.find_each(&:send_watering_reminder)"
     schedule: at 19pm every day
