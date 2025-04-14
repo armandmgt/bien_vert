@@ -7,7 +7,7 @@ class Plant < ApplicationRecord
   def send_watering_reminder
     return unless last_watered_at.nil? || (last_watered_at + watering_frequency.days).past?
 
-    display_name = name || species
+    display_name = name.presence || species.presence
     user.subscriptions.each do |subscription|
       Rpush::Webpush::Notification.create!(
         app: Rpush::App.find_by_name("webpush"),
