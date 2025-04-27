@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   end
   resources :passwords, only: [ :new, :create, :edit, :update ], param: :token
 
-  resources :plants, only: [ :index, :new, :edit, :create, :update, :destroy ]
+  resources :plants, only: [ :index, :new, :edit, :create, :update, :destroy ] do
+    collection { get :watering_quick_selector }
+  end
   resources :recognition_requests, only: [ :show, :new, :create, :update ]
 end

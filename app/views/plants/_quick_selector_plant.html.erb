@@ -17,13 +17,13 @@
     </a>
 
     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-      Arrosage : <span class="font-medium">tous les <%= number_to_human plant.watering_frequency %> jours</span>
+      Arrosage nécessaire depuis : <span class="font-medium"><%= distance_of_time_in_words_to_now((plant.last_watered_at || Time.current) + plant.watering_frequency.days) %></span>
     </p>
 
-    <%= link_to edit_plant_path(plant), class: "inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-lime-700 rounded-lg hover:bg-lime-800 focus:ring-4 focus:outline-none focus:ring-lime-300 dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800" do %>
-      Voir plus
+    <%= button_to plant_path(plant), method: :patch, params: { plant: { last_watered_at: Time.current } }, class: "inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-lime-700 rounded-lg hover:bg-lime-800 focus:ring-4 focus:outline-none focus:ring-lime-300 dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800" do %>
+      Arrosé
 
-      <%= lucide_icon "arrow-right", class: "w-3.5 h-3.5 ms-2" %>
+      <%= lucide_icon "cloud-rain", class: "w-3.5 h-3.5 ms-2" %>
     <% end %>
   </div>
 </div>

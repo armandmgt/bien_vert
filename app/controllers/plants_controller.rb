@@ -5,6 +5,10 @@ class PlantsController < ApplicationController
     @plants = Plant.all
   end
 
+  def watering_quick_selector
+    @plants = Plant.all
+  end
+
   def new
     @plant = Plant.new
   end
