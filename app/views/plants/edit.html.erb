@@ -1,7 +1,7 @@
-<div class="w-full">
+<div class="w-full pb-2">
   <% content_for :title, "Plante" %>
 
-  <div id="<%= dom_id(@plant) %>" class="min-w-full my-2">
+  <div id="<%= dom_id(@plant) %>" class="min-w-full my-4">
     <h1 class="mb-4 text-5xl font-extrabold dark:text-white">Modifier ma plante</h1>
 
     <%= render "form", plant: @plant %>

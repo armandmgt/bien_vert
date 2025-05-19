@@ -17,7 +17,19 @@
     </a>
 
     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-      Arrosage nécessaire depuis : <span class="font-medium"><%= distance_of_time_in_words_to_now((plant.last_watered_at || Time.current) + plant.watering_frequency.days) %></span>
+      <%
+        should_water_at =
+          if plant.last_watered_at.nil?
+            Time.current
+          else
+            plant.last_watered_at + plant.watering_frequency.days
+          end
+      %>
+      <% if should_water_at.past? %>
+        Arrosage nécessaire depuis : <span class="font-medium"><%= distance_of_time_in_words_to_now(should_water_at) %></span>
+      <% else %>
+        Arrosage dans : <span class="font-medium"><%= distance_of_time_in_words_to_now(should_water_at) %></span>
+      <% end %>
     </p>
 
     <%= button_to plant_path(plant), method: :patch, params: { plant: { last_watered_at: Time.current } }, class: "inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-lime-700 rounded-lg hover:bg-lime-800 focus:ring-4 focus:outline-none focus:ring-lime-300 dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800" do %>

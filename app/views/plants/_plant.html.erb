@@ -1,7 +1,7 @@
 <%# locals: (plant:)  %>
 
-<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-  <%= link_to edit_plant_path(plant), class: "min-h-40 flex justify-center items-center" do %>
+<div class="max-w-sm bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm dark:bg-gray-800 dark:border-gray-700">
+  <%= link_to edit_plant_path(plant), class: "min-h-40 aspect-square object-cover overflow-hidden flex justify-center items-center" do %>
     <% if plant.photo.attached? %>
       <%= image_tag plant.photo, class: "rounded-t-lg", alt: plant.name || dom_id(plant) %>
     <% else %>
