@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr" class="h-full">
 <head>
-  <title><%= content_for(:title) || "Bien Vert" %></title>
+  <title><%= content_for(:title) || "BienVert" %></title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
@@ -19,10 +19,11 @@
 
   <%# Includes all stylesheet files in app/assets/stylesheets %>
   <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag "native", "data-turbo-track": "reload" if hotwire_native_app? %>
   <%= javascript_importmap_tags %>
 </head>
 
-<body class="h-full">
+<body class="h-full" <%= "data-hotwire-native" if hotwire_native_app? %>>
 
 <% if authenticated? %>
   <%= render "navbar" if authenticated? %>

@@ -1,1 +1,3 @@
-<h1><%= params[:onboarding] ? "Onboarding" : "Profile" %></h1>
+<% content_for :title, "Profil" %>
+
+<h1><%= params[:onboarding] ? "Onboarding" : "Profil" %></h1>
