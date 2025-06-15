@@ -2,11 +2,11 @@ class PlantsController < ApplicationController
   before_action :set_plant, only: %i[ edit update destroy ]
 
   def index
-    @plants = Plant.all
+    @plants = Current.user.plants.all
   end
 
   def watering_quick_selector
-    @plants = Plant.all
+    @plants = Current.user.plants.all
   end
 
   def new
