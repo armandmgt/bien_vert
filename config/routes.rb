@@ -22,4 +22,6 @@ Rails.application.routes.draw do
     collection { get :watering_quick_selector }
   end
   resources :recognition_requests, only: [ :show, :new, :create, :update ]
+
+  get "privacy", to: "static#privacy"
 end
