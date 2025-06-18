@@ -9,14 +9,6 @@
                 "context": "default",
                 "pull_to_refresh_enabled": true
             }
-        },
-        {
-            "patterns": [
-                "/$"
-            ],
-            "properties": {
-                "presentation": "clear_all"
-            }
         }
     ]
 }

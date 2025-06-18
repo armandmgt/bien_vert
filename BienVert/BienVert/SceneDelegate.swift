@@ -8,17 +8,14 @@
 import HotwireNative
 import UIKit
 
-let rootURL = URL(string: "https://bien-vert.armandmgt.fr")!
+let rootURL = URL(string: "http://localhost:3000/")!
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
-    private let navigator = Navigator(configuration: .init(
-        name: "main",
-        startLocation: rootURL
-    ))
-
-    private let tabBarController = HotwireTabBarController()
+    private let tabBarController = HotwireTabBarController(
+        navigatorDelegate: NavigatorDelegate()
+    )
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         window?.rootViewController = tabBarController
