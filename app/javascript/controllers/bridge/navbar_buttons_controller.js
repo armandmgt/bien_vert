@@ -15,8 +15,9 @@ export default class extends BridgeComponent {
         androidImage: element.bridgeAttribute("android-image"),
       }
     })
+    const csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 
-    this.send("connect", { items }, message => {
+    this.send("connect", { items, csrfToken }, message => {
       const item = this.itemTargets[message.data.index]
       new BridgeElement(item).click()
     })

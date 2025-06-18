@@ -20,21 +20,47 @@ final class NavbarButtonsComponent: BridgeComponent {
 
         switch event {
         case .connect:
-            addMenuButton(via: message)
+            addMenuButtons(via: message)
         }
     }
 
-    private func addMenuButton(via message: Message) {
+    private func addMenuButtons(via message: Message) {
         guard let data: MessageData = message.data() else { return }
 
         var actions = [UIAction]()
         for (index, item) in data.items.enumerated() {
             let image = UIImage(systemName: item.image ?? "")
-            let action = UIAction(title: item.title, image: image) { [unowned self] _ in
-                reply(to: message.event, with: SelectionMessageData(index: index))
+            let action = UIAction(title: item.title, image: image) {
+                [unowned self] _ in
+                reply(
+                    to: message.event,
+                    with: SelectionMessageData(index: index)
+                )
             }
             actions.append(action)
         }
+        actions.append(
+            UIAction(title: "Déconnexion", image: UIImage(systemName: "power"))
+            { [] _ in
+                let logoutURL = rootURL.appendingPathComponent("session")
+                var request = URLRequest(url: logoutURL)
+                request.httpMethod = "DELETE"
+                request.setValue(data.csrfToken, forHTTPHeaderField: "X-CSRF-Token")
+                let session = URLSession(configuration: .default, delegate: RedirectBlocker(), delegateQueue: nil)
+                let task = session.dataTask(with: request) { data, response, error in
+                    if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 302 {
+                        DispatchQueue.main.async {
+                            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                               let window = windowScene.windows.first,
+                               let tabBarController = window.rootViewController as? HotwireTabBarController {
+                                tabBarController.load(HotwireTab.all)
+                            }
+                        }
+                    }
+                }
+                task.resume()
+            }
+        )
 
         let button = UIBarButtonItem(
             title: "Menu",
@@ -46,18 +72,19 @@ final class NavbarButtonsComponent: BridgeComponent {
     }
 }
 
-private extension NavbarButtonsComponent {
-    enum Event: String {
+extension NavbarButtonsComponent {
+    fileprivate enum Event: String {
         case connect
     }
 }
 
-private extension NavbarButtonsComponent {
-    struct MessageData: Decodable {
+extension NavbarButtonsComponent {
+    fileprivate struct MessageData: Decodable {
         let items: [Item]
+        let csrfToken: String
     }
 
-    struct Item: Decodable {
+    fileprivate struct Item: Decodable {
         let title: String
         let image: String?
 
@@ -67,7 +94,13 @@ private extension NavbarButtonsComponent {
         }
     }
 
-    struct SelectionMessageData: Encodable {
-        let index: Int
+    fileprivate struct SelectionMessageData: Encodable {
+        let index: Int?
+    }
+}
+
+private class RedirectBlocker: NSObject, URLSessionDelegate, URLSessionTaskDelegate {
+    func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse, newRequest request: URLRequest, completionHandler: @escaping (URLRequest?) -> Void) {
+        completionHandler(nil)
     }
 }

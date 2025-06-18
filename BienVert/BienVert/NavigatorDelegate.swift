@@ -6,17 +6,28 @@
 //
 
 import Foundation
-import UIKit
 import HotwireNative
+import UIKit
 
 class NavigatorDelegate: HotwireNative.NavigatorDelegate {
-    func visitableDidFailRequest(_ visitable: Visitable, error: Error, retryHandler: RetryBlock?) {
-        if let httpError = error as? TurboError, httpError ==
-            .http(statusCode: 401) {
+    func visitableDidFailRequest(
+        _ visitable: Visitable,
+        error: Error,
+        retryHandler: RetryBlock?
+    ) {
+        if let httpError = error as? TurboError,
+            httpError == .http(statusCode: 401)
+        {
             if let viewController = visitable as? UIViewController {
-                if !(viewController.presentedViewController is LoginViewController) {
+                if !(viewController.presentedViewController
+                    is LoginViewController)
+                {
                     let loginViewController = LoginViewController()
-                    viewController.present(loginViewController, animated: true, completion: nil)
+                    viewController.present(
+                        loginViewController,
+                        animated: true,
+                        completion: nil
+                    )
                 }
             }
             return

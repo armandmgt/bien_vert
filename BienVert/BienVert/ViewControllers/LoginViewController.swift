@@ -15,6 +15,7 @@ class LoginViewController: UIViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        isModalInPresentation = true
         setupWebView()
         loadLoginPage()
         observeWebViewURL()
