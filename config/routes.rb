@@ -24,4 +24,5 @@ Rails.application.routes.draw do
   resources :recognition_requests, only: [ :show, :new, :create, :update ]
 
   get "privacy", to: "static#privacy"
+  get "support", to: "static#support"
 end
