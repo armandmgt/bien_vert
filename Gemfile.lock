@@ -363,7 +363,7 @@ GEM
       jwt (>= 1.5, < 3.0)
       multi_json (~> 1.10)
     sin_lru_redux (2.5.2)
-    solid_cable (3.0.8)
+    solid_cable (3.0.11)
       actioncable (>= 7.2)
       activejob (>= 7.2)
       activerecord (>= 7.2)
@@ -432,7 +432,7 @@ GEM
       jwt (~> 2.0)
       openssl (~> 3.0)
     websocket (1.2.11)
-    websocket-driver (0.7.7)
+    websocket-driver (0.8.0)
       base64
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
