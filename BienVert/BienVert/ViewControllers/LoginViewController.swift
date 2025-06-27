@@ -42,8 +42,11 @@ class LoginViewController: UIViewController, WKNavigationDelegate {
     }
 
     private func observeWebViewURL() {
-        urlObservation = webView.observe(\.url, options: [.new]) { [weak self] webView, change in
-            guard let self = self, let url = change.newValue as? URL else { return }
+        urlObservation = webView.observe(\.url, options: [.new]) {
+            [weak self] webView, change in
+            guard let self = self, let url = change.newValue as? URL else {
+                return
+            }
             if self.isLoginSuccessURL(url) {
                 self.handleLoginSuccess()
             }
@@ -51,7 +54,9 @@ class LoginViewController: UIViewController, WKNavigationDelegate {
     }
 
     private func handleLoginSuccess() {
-        if let tabBarController = presentingViewController as? HotwireTabBarController {
+        if let tabBarController = presentingViewController
+            as? HotwireTabBarController
+        {
             tabBarController.load(HotwireTab.all)
         }
         self.dismiss(animated: true)
@@ -79,7 +84,9 @@ class LoginViewController: UIViewController, WKNavigationDelegate {
     }
 
     private func isLoginSuccessURL(_ url: URL) -> Bool {
-        return url.path() != "/session/new"
+        return !["/session/new", "/passwords/new", "/users/new"].contains(
+            url.path()
+        )
     }
 
     deinit {

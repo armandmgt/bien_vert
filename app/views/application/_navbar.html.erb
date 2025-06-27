@@ -314,7 +314,7 @@
             aria-labelledby="dropdown"
           >
             <li>
-              <%= link_to "Profil", edit_user_path(Current.user), class: "block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white" %>
+              <%= link_to "Profil", edit_user_path(Current.user), data: { "bridge--navbar-buttons-target": "item" }, class: "block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white" %>
             </li>
           </ul>
 

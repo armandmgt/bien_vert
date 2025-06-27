@@ -8,7 +8,7 @@
 import HotwireNative
 import UIKit
 
-let rootURL = URL(string: "https://bien-vert.armandmgt.fr/")!
+let rootURL = URL(string: ProcessInfo.processInfo.environment["APP_URL"] ?? "https://bien-vert.armandmgt.fr/")!
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?

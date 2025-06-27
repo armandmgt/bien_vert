@@ -12,11 +12,14 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "plants#index"
   resource :session, only: [ :new, :create, :destroy ]
-  resources :users, only: [ :new, :edit, :create, :update, :destroy ]
+  resources :users, only: [ :new, :create ]
+  resources :passwords, only: [ :new, :create, :edit, :update ], param: :token
+
+  resource :user, only: [ :edit, :update, :destroy ]
+
   resources :push_subscriptions, only: [ :create, :destroy ] do
     collection { get :vapid_key }
   end
-  resources :passwords, only: [ :new, :create, :edit, :update ], param: :token
 
   resources :plants, only: [ :index, :new, :edit, :create, :update, :destroy ] do
     collection { get :watering_quick_selector }

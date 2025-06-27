@@ -1,3 +1,7 @@
-<% content_for :title, "Profil" %>
+<% content_for :title, "Mon compte" %>
 
-<h1><%= params[:onboarding] ? "Onboarding" : "Profil" %></h1>
+<h1 class="hotwire-native:hidden">
+  <%= params[:onboarding] ? "Onboarding" : "Mon compte" %>
+</h1>
+
+<%= button_to "Supprimer mon compte", user_path, method: :delete, data: { turbo_confirm: "Êtes vous sûr de vouloir supprimer votre compte ?\nCette action ne peut pas être annulée." }, class: "bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" %>
