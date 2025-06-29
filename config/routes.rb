@@ -28,4 +28,6 @@ Rails.application.routes.draw do
 
   get "privacy", to: "static#privacy"
   get "support", to: "static#support"
+
+  mount SolidErrors::Engine, at: "/solid_errors"
 end

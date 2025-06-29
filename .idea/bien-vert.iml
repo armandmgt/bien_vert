@@ -87,7 +87,7 @@
     <orderEntry type="library" scope="PROVIDED" name="lint_roller (v1.1.0, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="logger (v1.7.0, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="loofah (v2.24.1, mise: 3.4.3) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="lucide-rails (v0.5.1, mise: 3.4.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="lucide-rails (v0.7.1, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mail (v2.8.1, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="marcel (v1.0.4, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="matrix (v0.4.2, mise: 3.4.3) [gem]" level="application" />
@@ -100,7 +100,7 @@
     <orderEntry type="library" scope="PROVIDED" name="net-http (v0.6.0, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="net-http-persistent (v4.0.5, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="net-http2 (v0.19.0, mise: 3.4.3) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="net-imap (v0.5.6, mise: 3.4.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="net-imap (v0.5.7, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="net-pop (v0.1.2, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="net-protocol (v0.2.2, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="net-scp (v4.1.0, mise: 3.4.3) [gem]" level="application" />
@@ -123,7 +123,7 @@
     <orderEntry type="library" scope="PROVIDED" name="puma (v6.6.0, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="raabro (v1.4.0, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="racc (v1.8.1, mise: 3.4.3) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rack (v3.1.15, mise: 3.4.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rack (v3.1.16, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack-session (v2.1.1, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack-test (v2.2.0, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rackup (v2.2.1, mise: 3.4.3) [gem]" level="application" />
@@ -151,8 +151,9 @@
     <orderEntry type="library" scope="PROVIDED" name="selenium-webdriver (v4.33.0, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="signet (v0.19.0, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sin_lru_redux (v2.5.2, mise: 3.4.3) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="solid_cable (v3.0.8, mise: 3.4.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="solid_cable (v3.0.11, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="solid_cache (v1.0.7, mise: 3.4.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="solid_errors (v0.7.0, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="solid_queue (v1.1.5, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sqlite3 (v2.7.0, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sshkit (v1.24.0, mise: 3.4.3) [gem]" level="application" />
@@ -173,7 +174,7 @@
     <orderEntry type="library" scope="PROVIDED" name="web-console (v4.2.1, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="web-push (v3.0.1, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="websocket (v1.2.11, mise: 3.4.3) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="websocket-driver (v0.7.7, mise: 3.4.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="websocket-driver (v0.8.0, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="websocket-extensions (v0.1.5, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="xpath (v3.2.0, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="zeitwerk (v2.7.3, mise: 3.4.3) [gem]" level="application" />
