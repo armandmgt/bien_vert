@@ -2,6 +2,7 @@ source "https://rubygems.org"
 
 gem "bcrypt"
 gem "bootsnap", require: false
+gem "hotwire-spark"
 gem "image_processing"
 gem "importmap-rails"
 gem "jbuilder"

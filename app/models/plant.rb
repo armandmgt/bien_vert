@@ -15,7 +15,7 @@ class Plant < ApplicationRecord
     }
 
     user.subscriptions.each do |subscription|
-      case subscription.symbolize_keys
+      case subscription.deep_symbolize_keys
       in { device_token: }
         Rpush::Apnsp8::Notification.create!(
           app: Rpush::App.find_by_name("apnsp8"),

@@ -12,7 +12,6 @@ export default class extends BridgeComponent {
   static component = "push-subscription"
 
   async connect() {
-    console.log("PushSubscriptionController connected")
     if (Object.hasOwn(document.body.dataset, "hotwireNative")) {
       this.subscribeNative()
     } else {
