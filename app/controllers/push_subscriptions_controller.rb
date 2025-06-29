@@ -24,6 +24,13 @@ class PushSubscriptionsController < ApplicationController
   private
 
   def create_params
-    params.expect push_subscription: [ :endpoint, :expirationTime, { keys: [ :p256dh, :auth ] } ]
+    params.expect push_subscription: [
+      :endpoint,
+      :expirationTime,
+
+      :device_token, # For APNs subscriptions
+
+      { keys: [ :p256dh, :auth ] }
+    ]
   end
 end

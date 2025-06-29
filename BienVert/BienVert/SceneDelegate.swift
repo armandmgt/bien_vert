@@ -21,6 +21,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = tabBarController
         tabBarController.load(HotwireTab.all)
     }
+
+    public func getTopViewController() -> UIViewController? {
+        return tabBarController.activeNavigator.activeNavigationController.topViewController
+    }
 }
 
 extension HotwireTab {
