@@ -3,8 +3,8 @@ require "test_helper"
 class PlantTest < ActiveSupport::TestCase
   test "send_watering_reminder should notify when plant was not watered ever" do
     users(:one).update(subscriptions: [
-      { endpoint: "https://example.com/subscription-one", keys: {} },
-      { endpoint: "https://example.com/subscription-two", keys: {} }
+      { endpoint: "https://example.com/subscription-one", keys: { p256dh: "", auth: "" } },
+      { endpoint: "https://example.com/subscription-two", keys: { p256dh: "", auth: "" } }
     ])
     plants(:one).update(last_watered_at: nil)
 
@@ -15,8 +15,8 @@ class PlantTest < ActiveSupport::TestCase
 
   test "send_watering_reminder should notify when plant was not watered recently" do
     users(:one).update(subscriptions: [
-      { endpoint: "https://example.com/subscription-one", keys: {} },
-      { endpoint: "https://example.com/subscription-two", keys: {} }
+      { endpoint: "https://example.com/subscription-one", keys: { p256dh: "", auth: "" } },
+      { endpoint: "https://example.com/subscription-two", keys: { p256dh: "", auth: "" } }
     ])
     plants(:one).tap { |plant| plant.update(last_watered_at: plant.watering_frequency.days.ago - 1.day) }
 
