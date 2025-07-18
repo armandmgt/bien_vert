@@ -13,9 +13,16 @@ let rootURL = URL(string: ProcessInfo.processInfo.environment["APP_URL"] ?? "htt
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
-    private let tabBarController = HotwireTabBarController(
-        navigatorDelegate: NavigatorDelegate()
-    )
+    private var navigatorDelegate: NavigatorDelegate
+    private let tabBarController: HotwireTabBarController
+
+    override init() {
+        navigatorDelegate = NavigatorDelegate(hotwireTabs: HotwireTab.all)
+        tabBarController = HotwireTabBarController(navigatorDelegate: navigatorDelegate)
+        navigatorDelegate.tabBarController = tabBarController
+
+        super.init()
+    }
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         window?.rootViewController = tabBarController
@@ -24,6 +31,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     public func getTopViewController() -> UIViewController? {
         return tabBarController.activeNavigator.activeNavigationController.topViewController
+    }
+
+    public func focusTab(_ tab: HotwireTab) {
+        tabBarController.selectedIndex = HotwireTab.all.firstIndex(of: tab) ?? 0
     }
 }
 

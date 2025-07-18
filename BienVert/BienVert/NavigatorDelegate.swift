@@ -10,6 +10,36 @@ import HotwireNative
 import UIKit
 
 class NavigatorDelegate: HotwireNative.NavigatorDelegate {
+    private var hotwireTabs: [HotwireTab]
+    var tabBarController: HotwireTabBarController?
+
+    init(hotwireTabs: [HotwireTab]) {
+        self.hotwireTabs = hotwireTabs
+    }
+
+    func handle(
+        proposal: VisitProposal,
+        from navigator: Navigator
+    ) -> ProposalResult {
+        guard let tabBarController = tabBarController else {
+            return .accept
+        }
+
+        if let otherTabIndex = hotwireTabs.firstIndex(
+            where: {
+                tabBarController.navigatorsByTab[$0] !== navigator
+                    && $0.url == proposal.url
+            }
+        ) {
+            tabBarController.activeNavigator.clearAll(animated: true)
+            tabBarController.selectedIndex = otherTabIndex
+            tabBarController.activeNavigator.route(proposal)
+            return .reject
+        }
+
+        return .accept
+    }
+
     func visitableDidFailRequest(
         _ visitable: Visitable,
         error: Error,
