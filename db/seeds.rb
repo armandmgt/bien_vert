@@ -14,11 +14,13 @@ Rpush::Webpush::App.find_or_create_by!(name: "webpush") do |app|
   app.connections = 1
 end
 
-Rpush::Apnsp8::App.find_or_create_by!(name: "apnsp8") do |app|
-  app.environment = Rails.env.local? ? :development : :production
-  app.apn_key_id = Rails.application.credentials.dig(:apn, :key_id)
-  app.apn_key = Base64.decode64(Rails.application.credentials.dig(:apn, :key) || "")
-  app.team_id = Rails.application.credentials.dig(:apn, :team_id)
-  app.bundle_id = Rails.application.credentials.dig(:apn, :bundle_id)
-  app.connections = 1
+unless Rails.env.test?
+  Rpush::Apnsp8::App.find_or_create_by!(name: "apnsp8") do |app|
+    app.environment = Rails.env.local? ? :development : :production
+    app.apn_key_id = Rails.application.credentials.dig(:apn, :key_id)
+    app.apn_key = Base64.decode64(Rails.application.credentials.dig(:apn, :key))
+    app.team_id = Rails.application.credentials.dig(:apn, :team_id)
+    app.bundle_id = Rails.application.credentials.dig(:apn, :bundle_id)
+    app.connections = 1
+  end
 end
