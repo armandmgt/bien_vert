@@ -14,6 +14,7 @@ FileUtils.chdir APP_ROOT do
 
   puts "== Installing dependencies =="
   system("bundle check") || system!("bundle install")
+  system! "brew ls libvips >/dev/null && echo libvips is present || brew install libvips"
 
   # puts "\n== Copying sample files =="
   # unless File.exist?("config/database.yml")

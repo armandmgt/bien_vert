@@ -15,7 +15,7 @@ gem "rpush"
 gem "ruby-openai"
 gem "solid_cable"
 gem "solid_cache"
-gem "solid_errors"
+gem "solid_errors", group: :production
 gem "solid_queue"
 gem "sqlite3", ">= 2.1"
 gem "stimulus-rails"
