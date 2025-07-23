@@ -3,10 +3,20 @@ updates:
 - package-ecosystem: bundler
   directory: "/"
   schedule:
-    interval: daily
+    interval: weekly
   open-pull-requests-limit: 10
+  groups:
+    production-dependencies:
+      dependency-type: "production"
+    development-dependencies:
+      dependency-type: "development"
+      exclude-patterns:
+        - "rubocop*"
+    rubocop:
+      patterns:
+        - "rubocop*"
 - package-ecosystem: github-actions
   directory: "/"
   schedule:
-    interval: daily
+    interval: weekly
   open-pull-requests-limit: 10
