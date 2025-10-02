@@ -8,48 +8,64 @@
 import HotwireNative
 import UIKit
 
-let rootURL = URL(string: ProcessInfo.processInfo.environment["APP_URL"] ?? "https://bien-vert.armandmgt.fr/")!
-
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
-    private var navigatorDelegate: NavigatorDelegate
-    private let tabBarController: HotwireTabBarController
+    private lazy var tabBarController = HotwireTabBarController(
+        navigatorDelegate: self
+    )
+    private let navigator = Navigator(
+        configuration: .init(
+            name: "unauthenticated-navigator",
+            startLocation: Endpoint.rootURL.appending(
+                components: "session",
+                "new"
+            ),
+        )
+    )
 
-    override init() {
-        navigatorDelegate = NavigatorDelegate(hotwireTabs: HotwireTab.all)
-        tabBarController = HotwireTabBarController(navigatorDelegate: navigatorDelegate)
-        navigatorDelegate.tabBarController = tabBarController
+    func scene(
+        _ scene: UIScene,
+        willConnectTo session: UISceneSession,
+        options connectionOptions: UIScene.ConnectionOptions
+    ) {
+        guard (scene as? UIWindowScene) != nil else { return }
 
-        super.init()
+        window?.rootViewController = navigator.rootViewController
+        navigator.start()
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(didSignIn),
+            name: .didSignIn,
+            object: nil
+        )
     }
 
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        window?.rootViewController = tabBarController
-        tabBarController.load(HotwireTab.all)
+    @objc private func didSignIn() {
+        if window?.rootViewController != tabBarController {
+            window?.rootViewController = tabBarController
+            tabBarController.load(Tab.authenticated)
+            tabBarController.selectedIndex = 0
+        }
     }
 
-    public func getTopViewController() -> UIViewController? {
-        return tabBarController.activeNavigator.activeNavigationController.topViewController
-    }
+    private func didSignOut() {
+        window?.rootViewController = navigator.rootViewController
 
-    public func focusTab(_ tab: HotwireTab) {
-        tabBarController.selectedIndex = HotwireTab.all.firstIndex(of: tab) ?? 0
+        navigator.rootViewController.popToRootViewController(animated: false)
+        navigator.reload()
     }
 }
 
-extension HotwireTab {
-    static let all = [
-        HotwireTab(
-            title: "Plantes",
-            image: UIImage(systemName: "leaf")!,
-            url: rootURL
-        ),
-
-        HotwireTab(
-            title: "Nouvelle reconnaissance",
-            image: UIImage(systemName: "sparkle.magnifyingglass")!,
-            url: rootURL.appending(path: "recognition_requests/new")
-        )
-    ]
+extension SceneDelegate: NavigatorDelegate {
+    func handle(proposal: VisitProposal, from navigator: Navigator)
+        -> ProposalResult
+    {
+        if proposal.properties.viewController == "sign_out" {
+            didSignOut()
+            return .reject
+        }
+        return .accept
+    }
 }

@@ -34,29 +34,14 @@ final class PushSubscriptionComponent: BridgeComponent {
             }
         }
     }
-
-    public func saveDeviceToken(_ deviceToken: Data) {
-        reply(
-            to: "connect",
-            with: ResponseMessageData(
-                deviceToken: deviceToken.hexEncodedString(),
-            )
-        )
-    }
 }
 
 extension PushSubscriptionComponent {
     fileprivate enum Event: String {
         case connect
     }
-}
 
-extension PushSubscriptionComponent {
     fileprivate struct MessageData: Decodable {
         let needsNewToken: Bool
-    }
-
-    struct ResponseMessageData: Encodable {
-        let deviceToken: String
     }
 }

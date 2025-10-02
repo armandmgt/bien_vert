@@ -39,28 +39,6 @@ final class NavbarButtonsComponent: BridgeComponent {
             }
             actions.append(action)
         }
-        actions.append(
-            UIAction(title: "Déconnexion", image: UIImage(systemName: "power"))
-            { [] _ in
-                let logoutURL = rootURL.appendingPathComponent("session")
-                var request = URLRequest(url: logoutURL)
-                request.httpMethod = "DELETE"
-                request.setValue(data.csrfToken, forHTTPHeaderField: "X-CSRF-Token")
-                let session = URLSession(configuration: .default, delegate: RedirectBlocker(), delegateQueue: nil)
-                let task = session.dataTask(with: request) { data, response, error in
-                    if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 302 {
-                        DispatchQueue.main.async {
-                            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                               let window = windowScene.windows.first,
-                               let tabBarController = window.rootViewController as? HotwireTabBarController {
-                                tabBarController.load(HotwireTab.all)
-                            }
-                        }
-                    }
-                }
-                task.resume()
-            }
-        )
 
         let button = UIBarButtonItem(
             title: "Menu",
@@ -81,7 +59,6 @@ extension NavbarButtonsComponent {
 extension NavbarButtonsComponent {
     fileprivate struct MessageData: Decodable {
         let items: [Item]
-        let csrfToken: String
     }
 
     fileprivate struct Item: Decodable {
@@ -96,11 +73,5 @@ extension NavbarButtonsComponent {
 
     fileprivate struct SelectionMessageData: Encodable {
         let index: Int?
-    }
-}
-
-private class RedirectBlocker: NSObject, URLSessionDelegate, URLSessionTaskDelegate {
-    func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse, newRequest request: URLRequest, completionHandler: @escaping (URLRequest?) -> Void) {
-        completionHandler(nil)
     }
 }

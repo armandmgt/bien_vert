@@ -5,7 +5,7 @@ function getMetaValue(name) {
   return element.getAttribute("content")
 }
 
-// Connects to data-controller="push-subscription"
+// Connects to data-controller="bridge--push-subscription"
 export default class extends BridgeComponent {
   static values = { vapidKeyUrl: String, postUrl: String, needsNewToken: Boolean }
   static targets = ["requestToast", "successToast"]

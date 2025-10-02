@@ -9,6 +9,14 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
+  # Hotwire Native
+  namespace :hotwire do
+    resources :configurations, only: [] do
+      get :ios, on: :collection
+      get :android, on: :collection
+    end
+  end
+
   # Defines the root path route ("/")
   root "plants#index"
   resource :session, only: [ :new, :create, :destroy ]

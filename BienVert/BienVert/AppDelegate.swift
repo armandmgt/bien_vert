@@ -22,9 +22,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         Hotwire.config.debugLoggingEnabled = true
         Hotwire.loadPathConfiguration(from: [
-            .file(localPathConfigURL)
+            .file(localPathConfigURL),
+            .server(Endpoint.rootURL.appending(components: "hotwire", "configurations", "ios.json"))
         ])
         Hotwire.registerBridgeComponents([
+            AuthenticationComponent.self,
             NavbarButtonsComponent.self,
             PushSubscriptionComponent.self,
         ])
@@ -39,20 +41,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
     ) {
-        guard
-            let sceneDelegate = application.connectedScenes.first?.delegate
-                as? SceneDelegate
-        else {
-            print("Failed to get SceneDelegate")
-            return
-        }
-
-        if let topViewController = sceneDelegate.getTopViewController()
-            as? HotwireWebViewController
-        {
-            let component: PushSubscriptionComponent? = topViewController
-                .bridgeDelegate.component()
-            component?.saveDeviceToken(deviceToken)
-        }
     }
 }

@@ -1,5 +1,6 @@
 import { BridgeComponent, BridgeElement } from "@hotwired/hotwire-native-bridge"
 
+// Connects to data-controller="bridge--navbar-buttons"
 export default class extends BridgeComponent {
   static component = "navbar-buttons"
   static targets = ["item"]
@@ -15,9 +16,8 @@ export default class extends BridgeComponent {
         androidImage: element.bridgeAttribute("android-image"),
       }
     })
-    const csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 
-    this.send("connect", { items, csrfToken }, message => {
+    this.send("connect", { items }, message => {
       const item = this.itemTargets[message.data.index]
       new BridgeElement(item).click()
     })

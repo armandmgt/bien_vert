@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E471AF5A2E11C2C200DE39AA /* HotwireNative in Frameworks */ = {isa = PBXBuildFile; productRef = E471AF592E11C2C200DE39AA /* HotwireNative */; };
+		E481CE352E8F07FE001C4F59 /* HotwireNative in Frameworks */ = {isa = PBXBuildFile; productRef = E481CE342E8F07FE001C4F59 /* HotwireNative */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E481CE352E8F07FE001C4F59 /* HotwireNative in Frameworks */,
 				E471AF5A2E11C2C200DE39AA /* HotwireNative in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -84,6 +86,7 @@
 			name = BienVert;
 			packageProductDependencies = (
 				E471AF592E11C2C200DE39AA /* HotwireNative */,
+				E481CE342E8F07FE001C4F59 /* HotwireNative */,
 			);
 			productName = BienVert;
 			productReference = E41D30D22DFB485200441A4A /* BienVert.app */;
@@ -114,7 +117,7 @@
 			mainGroup = E41D30C92DFB485200441A4A;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				E471AF582E11C2C200DE39AA /* XCLocalSwiftPackageReference "../../hotwire-native-ios" */,
+				E481CE332E8F07FE001C4F59 /* XCRemoteSwiftPackageReference "hotwire-native-ios" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E41D30D32DFB485200441A4A /* Products */;
@@ -355,16 +358,25 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		E471AF582E11C2C200DE39AA /* XCLocalSwiftPackageReference "../../hotwire-native-ios" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = "../../hotwire-native-ios";
+/* Begin XCRemoteSwiftPackageReference section */
+		E481CE332E8F07FE001C4F59 /* XCRemoteSwiftPackageReference "hotwire-native-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hotwired/hotwire-native-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.2;
+			};
 		};
-/* End XCLocalSwiftPackageReference section */
+/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		E471AF592E11C2C200DE39AA /* HotwireNative */ = {
 			isa = XCSwiftPackageProductDependency;
+			productName = HotwireNative;
+		};
+		E481CE342E8F07FE001C4F59 /* HotwireNative */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E481CE332E8F07FE001C4F59 /* XCRemoteSwiftPackageReference "hotwire-native-ios" */;
 			productName = HotwireNative;
 		};
 /* End XCSwiftPackageProductDependency section */
