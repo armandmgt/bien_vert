@@ -13,7 +13,6 @@ final class PushSubscriptionComponent: BridgeComponent {
 
     override func onReceive(message: Message) {
         guard let event = Event(rawValue: message.event) else { return }
-        guard let data: MessageData = message.data() else { return }
 
         switch event {
         case .connect:
@@ -26,7 +25,7 @@ final class PushSubscriptionComponent: BridgeComponent {
                     )
                 } else if granted {
                     DispatchQueue.main.async {
-                        if data.needsNewToken || !UIApplication.shared.isRegisteredForRemoteNotifications {
+                        if !UIApplication.shared.isRegisteredForRemoteNotifications {
                             UIApplication.shared.registerForRemoteNotifications()
                         }
                     }
@@ -39,9 +38,5 @@ final class PushSubscriptionComponent: BridgeComponent {
 extension PushSubscriptionComponent {
     fileprivate enum Event: String {
         case connect
-    }
-
-    fileprivate struct MessageData: Decodable {
-        let needsNewToken: Bool
     }
 }

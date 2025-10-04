@@ -4,16 +4,7 @@ class PushSubscriptionsController < ApplicationController
   end
 
   def create
-    Current.user.subscriptions << create_params
-    if Current.user.save
-      head :ok
-    else
-      head :unprocessable_content
-    end
-  end
-
-  def destroy
-    Current.user.subscriptions.delete_at params[:id].to_i
+    Current.user.find_or_add_subscription(create_params)
     if Current.user.save
       head :ok
     else

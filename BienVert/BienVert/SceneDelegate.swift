@@ -47,14 +47,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window?.rootViewController = tabBarController
             tabBarController.load(Tab.authenticated)
             tabBarController.selectedIndex = 0
+
+            Task {
+                switch await NotificationTokenViewModel().post("") {
+                case .success:
+                    print(#function, "Notification token posted successfully")
+                case .failure(let error):
+                    print(#function, error.localizedDescription)
+                }
+            }
         }
     }
 
     private func didSignOut() {
-        window?.rootViewController = navigator.rootViewController
-
-        navigator.rootViewController.popToRootViewController(animated: false)
-        navigator.reload()
+        if window?.rootViewController != navigator.rootViewController {
+            window?.rootViewController = navigator.rootViewController
+            navigator.rootViewController.popToRootViewController(
+                animated: false
+            )
+            navigator.reload()
+        }
     }
 }
 

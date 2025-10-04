@@ -8,4 +8,10 @@ class User < ApplicationRecord
   validates :email_address, presence: true, uniqueness: { case_sensitive: false }
 
   serialize :subscriptions, coder: JSON
+
+  def find_or_add_subscription(params)
+    unless subscriptions.include?(params)
+      subscriptions << params
+    end
+  end
 end

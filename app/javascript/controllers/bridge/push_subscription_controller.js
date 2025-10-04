@@ -1,4 +1,4 @@
-import { BridgeComponent, BridgeElement } from "@hotwired/hotwire-native-bridge"
+import { BridgeComponent } from "@hotwired/hotwire-native-bridge"
 
 function getMetaValue(name) {
   const element = document.head.querySelector(`meta[name="${name}"]`)
@@ -7,7 +7,7 @@ function getMetaValue(name) {
 
 // Connects to data-controller="bridge--push-subscription"
 export default class extends BridgeComponent {
-  static values = { vapidKeyUrl: String, postUrl: String, needsNewToken: Boolean }
+  static values = { vapidKeyUrl: String, postUrl: String }
   static targets = ["requestToast", "successToast"]
   static component = "push-subscription"
 
@@ -27,24 +27,7 @@ export default class extends BridgeComponent {
   }
 
   subscribeNative() {
-    this.send("connect", { needsNewToken: this.needsNewTokenValue }, message => {
-      if (message.data.deviceToken) {
-        const deviceToken = message.data.deviceToken
-        fetch(this.postUrlValue, {
-          method: "post",
-          headers: {
-            "Content-type": "application/json",
-            "X-CSRF-Token": getMetaValue("csrf-token"),
-          },
-          body: JSON.stringify({
-            device_token: deviceToken,
-          }),
-        })
-
-        this.successToastTarget.classList.remove("hidden")
-        setTimeout(() => this.successToastTarget.classList.add("hidden"), 5000)
-      }
-    })
+    this.send("connect")
   }
 
   async subscribeBrowser() {

@@ -25,7 +25,7 @@ Rails.application.routes.draw do
 
   resource :user, only: [ :edit, :update, :destroy ]
 
-  resources :push_subscriptions, only: [ :create, :destroy ] do
+  resources :push_subscriptions, only: [ :create ] do
     collection { get :vapid_key }
   end
 
