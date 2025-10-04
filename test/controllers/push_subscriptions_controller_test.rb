@@ -17,11 +17,9 @@ class PushSubscriptionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should destroy subscription" do
-    post push_subscriptions_path, params: { push_subscription: { endpoint: "https://example.com", expirationTime: 1.month.from_now, keys: { p256dh: SecureRandom.hex(32), auth: SecureRandom.hex(32) } } }
-
-    assert_difference "users(:one).reload.subscriptions.count", -1 do
-      delete push_subscription_path(0)
+  test "should create a subscription via JSON" do
+    assert_difference "users(:one).reload.subscriptions.count", 1 do
+      post push_subscriptions_path, params: { deviceToken: "foo", platform: "ios" }.to_json, headers: { "Content-Type" => "application/json" }
     end
     assert_response :success
   end

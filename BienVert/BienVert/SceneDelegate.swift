@@ -47,15 +47,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window?.rootViewController = tabBarController
             tabBarController.load(Tab.authenticated)
             tabBarController.selectedIndex = 0
-
-            Task {
-                switch await NotificationTokenViewModel().post("") {
-                case .success:
-                    print(#function, "Notification token posted successfully")
-                case .failure(let error):
-                    print(#function, error.localizedDescription)
-                }
-            }
         }
     }
 

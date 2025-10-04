@@ -47,7 +47,10 @@ export default class extends BridgeComponent {
         "X-CSRF-Token": getMetaValue("csrf-token"),
       },
       body: JSON.stringify({
-        push_subscription: subscription,
+        push_subscription: {
+          ...subscription,
+          platform: "browser",
+        },
       }),
     })
 
