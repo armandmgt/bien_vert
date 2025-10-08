@@ -21,13 +21,12 @@ final class PushSubscriptionComponent: BridgeComponent {
             ) { granted, error in
                 if let error = error {
                     print(
+                        #function,
                         "Error requesting notification authorization: \(error)"
                     )
                 } else if granted {
                     DispatchQueue.main.async {
-                        if !UIApplication.shared.isRegisteredForRemoteNotifications {
-                            UIApplication.shared.registerForRemoteNotifications()
-                        }
+                        UIApplication.shared.registerForRemoteNotifications()
                     }
                 }
             }

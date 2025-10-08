@@ -52,6 +52,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     private func didSignOut() {
         if window?.rootViewController != navigator.rootViewController {
+            UIApplication.shared.unregisterForRemoteNotifications()
             window?.rootViewController = navigator.rootViewController
             navigator.rootViewController.popToRootViewController(
                 animated: false
@@ -65,7 +66,8 @@ extension SceneDelegate: NavigatorDelegate {
     func handle(proposal: VisitProposal, from navigator: Navigator)
         -> ProposalResult
     {
-        if proposal.properties.viewController == "sign_out" {
+        print(#function, proposal)
+        if proposal.properties["is_after_sign_out_path"] as? Bool ?? false {
             didSignOut()
             return .reject
         }
