@@ -20,7 +20,7 @@ module Hotwire
           {
             patterns: [ new_session_path ],
             properties: {
-              view_controller: "sign_out"
+              is_after_sign_out_path: true
             }
           }
         ]
