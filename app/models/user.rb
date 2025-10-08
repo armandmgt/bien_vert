@@ -10,8 +10,8 @@ class User < ApplicationRecord
   serialize :subscriptions, coder: JSON
 
   def find_or_add_subscription(params)
-    unless subscriptions.include?(params)
-      subscriptions << params
+    unless subscriptions.include?(params.as_json)
+      subscriptions << params.as_json
     end
   end
 end
