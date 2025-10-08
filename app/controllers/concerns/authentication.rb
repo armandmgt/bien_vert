@@ -31,13 +31,8 @@ module Authentication
   end
 
   def request_authentication
-    if hotwire_native_app?
-      headers["WWW-Authenticate"] = %(Basic realm="Application")
-      head :unauthorized
-    else
-      session[:return_to_after_authenticating] = request.url
-      redirect_to new_session_path
-    end
+    session[:return_to_after_authenticating] = request.url
+    redirect_to new_session_path
   end
 
   def after_authentication_url
