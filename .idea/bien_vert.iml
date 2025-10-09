@@ -125,7 +125,7 @@
     <orderEntry type="library" scope="PROVIDED" name="puma (v7.0.4, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="raabro (v1.4.0, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="racc (v1.8.1, mise: 3.4.3) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rack (v3.2.1, mise: 3.4.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rack (v3.2.2, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack-session (v2.1.1, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack-test (v2.2.0, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rackup (v2.2.1, mise: 3.4.3) [gem]" level="application" />
@@ -140,7 +140,7 @@
     <orderEntry type="library" scope="PROVIDED" name="rdoc (v6.14.2, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="regexp_parser (v2.10.0, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="reline (v0.6.2, mise: 3.4.3) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rexml (v3.4.2, mise: 3.4.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rexml (v3.4.4, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rpush (v9.2.0, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rubocop (v1.75.1, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rubocop-ast (v1.43.0, mise: 3.4.3) [gem]" level="application" />
@@ -150,9 +150,9 @@
     <orderEntry type="library" scope="PROVIDED" name="ruby-openai (v8.3.0, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ruby-progressbar (v1.13.0, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ruby-vips (v2.2.3, mise: 3.4.3) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rubyzip (v3.0.2, mise: 3.4.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rubyzip (v3.1.1, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="securerandom (v0.4.1, mise: 3.4.3) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="selenium-webdriver (v4.35.0, mise: 3.4.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="selenium-webdriver (v4.36.0, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="signet (v0.21.0, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sin_lru_redux (v2.5.2, mise: 3.4.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="solid_cable (v3.0.12, mise: 3.4.3) [gem]" level="application" />
