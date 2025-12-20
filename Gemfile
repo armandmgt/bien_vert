@@ -19,8 +19,8 @@ gem "solid_errors", group: :production
 gem "solid_queue"
 gem "sqlite3", ">= 2.1"
 gem "stimulus-rails"
-gem "tailwind_merge"
 gem "tailwindcss-rails"
+gem "tailwind_merge"
 gem "thruster", require: false
 gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
