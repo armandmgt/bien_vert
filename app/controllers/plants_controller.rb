@@ -5,10 +5,6 @@ class PlantsController < ApplicationController
     @plants = Current.user.plants.all
   end
 
-  def watering_quick_selector
-    @plants = Current.user.plants.all
-  end
-
   def new
     @plant = Plant.new
   end
@@ -44,7 +40,7 @@ class PlantsController < ApplicationController
   private
 
   def set_plant
-    @plant = Plant.find(params[:id])
+    @plant = Current.user.plants.find(params[:id])
   end
 
   def plant_params

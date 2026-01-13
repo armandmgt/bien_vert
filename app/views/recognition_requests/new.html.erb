@@ -1,51 +1,45 @@
-<div class="w-full">
-  <% content_for :title, "Plante" %>
+<main class="prose dark:prose-invert md:py-16 py-8">
+  <header>
+    <h1>Identifier ma plante</h1>
+  </header>
 
-  <div id="new_plant" class="min-w-full my-2">
-    <h1 class="mb-4 text-5xl font-extrabold dark:text-white">Identifier ma plante</h1>
-
-    <%= form_with model: @recognition_request, class: "max-w-sm mx-auto" do |form| %>
-      <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-
-        <fieldset class="group relative flex items-center justify-center w-full p-2" data-controller="file-input-preview">
-          <%= form.label :photo, class: "relative flex flex-col items-center justify-center w-full min-h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600 overflow-hidden transition-all" do %>
-            <div class="icon-instructions flex flex-col items-center justify-center pt-5 pb-6 w-full transition-all">
-              <%= lucide_icon "cloud-upload", class: "w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" %>
-
-              <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                <span class="font-semibold">Cliquez pour choisir</span> ou glissez-deposez une image
-              </p>
-
-              <p class="text-xs text-gray-500 dark:text-gray-400">
-                PNG ou JPG
-              </p>
-            </div>
-
-            <%= form.file_field :photo, required: true, accept: "image/*", data: { file_input_preview_target: "input" }, class: "absolute top-0 left-0 w-full h-full px-2 group-invalid:opacity-0 cursor-pointer file:hidden z-20" %>
-
-            <div data-file-input-preview-target="destination" class="flex items-center justify-center w-full py-2"></div>
-
-            <template data-file-input-preview-target="previewTemplate">
-              <img alt="Aperçu" class="w-28 h-28 object-cover rounded-lg border border-gray-200 dark:border-gray-600 bg-white shadow" />
-            </template>
-          <% end %>
-        </fieldset>
-
-        <div class="p-5">
-          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            Reconnaissance par IA
-          </h5>
-
-          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-            L’espèce de la plante et sa fréquence d’arrosage seront identifiées par IA à l’aide de GPT-4o.
+  <%= form_with model: @recognition_request, class: "contents" do |form| %>
+    <fieldset class="group relative flex items-center justify-center w-full" data-controller="file-input-preview">
+      <%= form.label :photo, class: "relative flex flex-col items-center justify-center w-full min-h-40 border-2 border-base-300 border-dashed rounded-lg cursor-pointer bg-base-300 hover:bg-base-100 overflow-hidden transition-all" do %>
+        <div class="text-center p-4">
+          <p>
+            <%= lucide_icon "cloud-upload", class: "size-8 inline" %>
           </p>
 
-          <%= form.submit "Identifier", class: "inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-lime-700 rounded-lg hover:bg-lime-800 focus:ring-4 focus:outline-none focus:ring-lime-300 dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800" %>
+          <p>
+            <span class="font-semibold">Cliquez pour choisir</span> ou glissez-deposez une image
+          </p>
+
+          <p class="text-xs">
+            PNG ou JPG
+          </p>
         </div>
 
-      </div>
-    <% end %>
-  </div>
+        <%= form.file_field :photo, required: true, accept: "image/*", data: { file_input_preview_target: "input" }, class: "absolute top-0 left-0 w-full h-full px-2 group-invalid:opacity-0 cursor-pointer file:hidden z-1" %>
 
-  <%= link_to "Retour aux plantes", root_path, class: "hotwire-native:hidden" %>
-</div>
+        <div data-file-input-preview-target="destination" class="flex items-center justify-center w-full py-2"></div>
+
+        <template data-file-input-preview-target="previewTemplate">
+          <img alt="Aperçu" class="size-28 object-cover rounded-lg border border-gray-200 dark:border-gray-600 bg-white shadow"/>
+        </template>
+      <% end %>
+    </fieldset>
+
+    <h3>
+      Reconnaissance par IA
+    </h3>
+
+    <p>
+      L’espèce de la plante et sa fréquence d’arrosage seront identifiées par IA à l’aide de GPT-4o.
+    </p>
+
+    <%= form.submit "Identifier", class: "btn btn-primary" %>
+  <% end %>
+
+  <%= link_to "Retour aux plantes", root_path, class: "btn btn-link hotwire-native:hidden" %>
+</main>

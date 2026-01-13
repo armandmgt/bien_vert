@@ -4,8 +4,12 @@ class Plant < ApplicationRecord
 
   validates :species, :watering_frequency, presence: true
 
+  def needs_watering?
+    last_watered_at.nil? || (last_watered_at + watering_frequency.days).past?
+  end
+
   def send_watering_reminder
-    return unless last_watered_at.nil? || (last_watered_at + watering_frequency.days).past?
+    return unless needs_watering?
 
     display_name = name.presence || species.presence
     title = "Rappel d’arrosage"

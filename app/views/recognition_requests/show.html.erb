@@ -1,14 +1,13 @@
-<div class="w-full">
-  <% content_for :title, "Plante" %>
-
-  <div id="new_plant" class="min-w-full my-2">
-    <h1 class="mb-4 text-5xl font-extrabold dark:text-white">
-      Reconnaissance d’image <span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">IA</span>
+<main class="prose dark:prose-invert md:py-16 py-8">
+  <header class="flex justify-between items-center mb-4">
+    <h1>
+      Reconnaissance d’image
+      <span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">IA</span>
     </h1>
+  </header>
 
-    <%= turbo_stream_from @recognition_request %>
-    <%= render "recognition_request", recognition_request: @recognition_request %>
-  </div>
+  <%= turbo_stream_from @recognition_request %>
+  <%= render "recognition_request", recognition_request: @recognition_request %>
 
-  <%= link_to "Retour aux plantes", root_path %>
-</div>
+  <%= link_to "Retour aux plantes", root_path, class: "btn btn-link" %>
+</main>

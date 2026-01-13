@@ -1,50 +1,26 @@
-<% if @plants.empty? %>
-  <div class="text-center my-8">
-    <p class="mb-4 text-lg text-gray-600">Vous n’avez aucune plante pour le moment.</p>
-    <%= link_to "Ajouter en via la détection !", new_recognition_request_path, class: "inline-block px-4 py-2 bg-lime-700 text-white rounded hover:bg-lime-800" %>
-  </div>
-<% end %>
+<main class="prose dark:prose-invert md:py-16 py-8">
+  <header class="flex justify-between items-center mb-4">
+    <h2 class="mt-0 mb-0">Mes plantes</h2>
 
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-4">
-  <% @plants.each do |plant| %>
-    <%= render "plant", plant: plant %>
-  <% end %>
-</div>
-
-<div data-dial-init class="fixed end-6 bottom-6 group hotwire-native:hidden">
-  <div id="speed-dial-menu-default" class="flex flex-col items-center hidden mb-4 space-y-2">
-    <%= link_to watering_quick_selector_plants_path, data: { "tooltip-target": "tooltip-water", "tooltip-placement": "left" }, class: "flex justify-center items-center w-18 h-18 text-gray-500 hover:text-gray-900 bg-white rounded-full border border-gray-200 dark:border-gray-600 shadow-xs dark:hover:text-white dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400" do %>
-      <%= lucide_icon "cloud-rain", class: "w-5 h-5" %>
-
-      <span class="sr-only">
-        Arrosage fait !
-      </span>
-    <% end %>
-
-    <div id="tooltip-water" role="tooltip" class="absolute z-10 invisible inline-block w-auto text-nowrap px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
-      Arrosage fait !
-      <div class="tooltip-arrow" data-popper-arrow></div>
-    </div>
-
-    <%= link_to new_recognition_request_path, data: { "tooltip-target": "tooltip-add", "tooltip-placement": "left" }, class: "flex justify-center items-center w-18 h-18 text-gray-500 hover:text-gray-900 bg-white rounded-full border border-gray-200 dark:border-gray-600 shadow-xs dark:hover:text-white dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400" do %>
-      <%= lucide_icon "leaf", class: "w-5 h-5" %>
-
-      <span class="sr-only">
-        Nouvelle plante
-      </span>
-    <% end %>
-
-    <div id="tooltip-add" role="tooltip" class="absolute z-10 invisible inline-block w-auto text-nowrap px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
+    <%= link_to new_recognition_request_path, class: "btn btn-primary btn-lg" do %>
+      <%= lucide_icon "leaf", class: "size-[1.4em]" %>
       Nouvelle plante
-      <div class="tooltip-arrow" data-popper-arrow></div>
-    </div>
-  </div>
+    <% end %>
+  </header>
 
-  <button type="button" data-dial-toggle="speed-dial-menu-default" aria-controls="speed-dial-menu-default" aria-expanded="false" class="flex items-center justify-center text-white bg-lime-700 rounded-full w-20 h-20 hover:bg-lime-800 dark:bg-lime-600 dark:hover:bg-lime-700 focus:ring-4 focus:ring-lime-300 focus:outline-none dark:focus:ring-lime-800">
-    <%= lucide_icon "plus", class: "w-8 h-8 transition-transform group-hover:rotate-45" %>
-
-    <span class="sr-only">
-      Ouvrir les actions rapides
-    </span>
-  </button>
-</div>
+  <section>
+    <% if @plants.empty? %>
+      <p class="text-center">
+        Vous n’avez aucune plante pour le moment.
+        <br/>
+        Ajouter en via la fonctionnalité de détection par IA ci-dessus !
+      </p>
+    <% else %>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 justify-items-center">
+        <% @plants.each do |plant| %>
+          <%= render "plant", plant: plant %>
+        <% end %>
+      </div>
+    <% end %>
+  </section>
+</main>
