@@ -13,12 +13,12 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create new session" do
-    post session_path, params: { email_address: users(:one).email_address, password: "password" }
+    post session_path, params: { user: { email_address: users(:one).email_address, password: "password" } }
     assert_redirected_to root_path
   end
 
   test "should not create session if incorrect password" do
-    post session_path, params: { email_address: users(:one).email_address, password: "wrong_password" }
+    post session_path, params: { user: { email_address: users(:one).email_address, password: "wrong_password" } }
     assert_redirected_to new_session_path
   end
 end
