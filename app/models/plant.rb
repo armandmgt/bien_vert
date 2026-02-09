@@ -8,6 +8,22 @@ class Plant < ApplicationRecord
     last_watered_at.nil? || (last_watered_at + watering_frequency.days).past?
   end
 
+  def reminder_criticality
+    if Time.current - should_water_at >= watering_frequency.days * 0.5
+      :urgent
+    else
+      :normal
+    end
+  end
+
+  def should_water_at
+    if last_watered_at.nil?
+      Time.current
+    else
+      last_watered_at + watering_frequency.days
+    end
+  end
+
   def display_name(with_prefix: false)
     display_name = name.presence || species.presence
     return display_name unless with_prefix

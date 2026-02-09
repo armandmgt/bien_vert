@@ -10,7 +10,16 @@
 
     <% if plant.needs_watering? %>
       <div class="absolute top-0 left-1">
-        <div class="badge badge-accent">Arrosage nécessaire</div>
+        <% badge_color_class, icon =
+             case plant.reminder_criticality
+             when :urgent then %w[badge-error triangle-alert]
+             else ["badge-accent", nil]
+             end
+        %>
+        <div class="badge <%= badge_color_class %>">
+          <%= lucide_icon icon, class: "size-[1em]" if icon %>
+          Nécessaire depuis <%= distance_of_time_in_words_to_now plant.should_water_at %>
+        </div>
       </div>
     <% end %>
   </figure>
