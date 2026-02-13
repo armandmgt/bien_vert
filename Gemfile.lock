@@ -117,10 +117,11 @@ GEM
       faraday-net_http (>= 2.0, < 3.5)
       json
       logger
-    faraday-multipart (1.1.1)
+    faraday-multipart (1.2.0)
       multipart-post (~> 2.0)
     faraday-net_http (3.4.2)
       net-http (~> 0.5)
+    ffi (1.17.1)
     ffi (1.17.1-aarch64-linux-gnu)
     ffi (1.17.1-aarch64-linux-musl)
     ffi (1.17.1-arm-linux-gnu)
@@ -444,7 +445,7 @@ GEM
       concurrent-ruby (~> 1.0)
     unicode-display_width (3.1.4)
       unicode-emoji (~> 4.0, >= 4.0.4)
-    unicode-emoji (4.0.4)
+    unicode-emoji (4.2.0)
     uri (1.1.1)
     useragent (0.16.11)
     web-console (4.2.1)
@@ -471,6 +472,7 @@ PLATFORMS
   arm-linux-gnu
   arm-linux-musl
   arm64-darwin-24
+  arm64-darwin-25
   x86_64-linux
   x86_64-linux-gnu
   x86_64-linux-musl
@@ -509,4 +511,4 @@ DEPENDENCIES
   web-push
 
 BUNDLED WITH
-   2.6.2
+  4.0.6
