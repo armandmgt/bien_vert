@@ -22,7 +22,7 @@ class Plant < ApplicationRecord
             alert: { title: title, body: body },
             data: {},
           )
-        in { endpoint: _, keys: { p256dh: _, auth: _ }}
+        in { endpoint: _, keys: { p256dh: _, auth: _ } }
           Rpush::Webpush::Notification.create!(
             app: Rpush::App.find_by_name("webpush"),
             registration_ids: [ subscription.symbolize_keys ],

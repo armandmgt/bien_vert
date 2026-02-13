@@ -2,7 +2,7 @@ class PlantsController < ApplicationController
   before_action :set_plant, only: %i[ edit update destroy ]
 
   def index
-    @plants = Current.user.plants.all
+    @plants = Current.user.plants.all.sort_by(&:should_water_at)
   end
 
   def new
