@@ -3,6 +3,9 @@ class Plant < ApplicationRecord
   has_one_attached :photo
 
   validates :species, :watering_frequency, presence: true
+  after_update do
+    RefreshAppBadgesJob.perform_later(user) if saved_change_to_last_watered_at?
+  end
 
   class << self
     def send_watering_reminder_for(user)
