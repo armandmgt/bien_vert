@@ -1,6 +1,12 @@
 ---
 fr:
   activerecord:
+    models:
+      plant:
+        watering_reminder:
+          one: "C’est l’heure d’arroser %{display_name}"
+          other: "C’est l’heure d’arroser %{count} plantes"
+        watering_reminder_title: "Rappel d’arrosage"
     attributes:
       user:
         email_address: Adresse email

@@ -37,6 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AuthenticationComponent.self,
             NavbarButtonsComponent.self,
             PushSubscriptionComponent.self,
+            NotificationCountComponent.self,
         ])
 
         UINavigationBar.appearance().scrollEdgeAppearance = .init()

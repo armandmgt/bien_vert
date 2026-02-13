@@ -1,7 +1,7 @@
 require "test_helper"
 
 class PlantTest < ActiveSupport::TestCase
-  test "send_watering_reminder should notify when plant was not watered ever" do
+  test "send_watering_reminder_for(user) should notify when plant was not watered ever" do
     users(:one).update(subscriptions: [
       { endpoint: "https://example.com/subscription-one", keys: { p256dh: "", auth: "" } },
       { endpoint: "https://example.com/subscription-two", keys: { p256dh: "", auth: "" } }
@@ -9,11 +9,11 @@ class PlantTest < ActiveSupport::TestCase
     plants(:one).update(last_watered_at: nil)
 
     assert_difference "Rpush::Notification.count", 2 do
-      plants(:one).send_watering_reminder
+      Plant.send_watering_reminder_for(users(:one))
     end
   end
 
-  test "send_watering_reminder should notify when plant was not watered recently" do
+  test "send_watering_reminder_for(user) should notify when plant was not watered recently" do
     users(:one).update(subscriptions: [
       { endpoint: "https://example.com/subscription-one", keys: { p256dh: "", auth: "" } },
       { endpoint: "https://example.com/subscription-two", keys: { p256dh: "", auth: "" } }
@@ -21,11 +21,11 @@ class PlantTest < ActiveSupport::TestCase
     plants(:one).tap { |plant| plant.update(last_watered_at: plant.watering_frequency.days.ago - 1.day) }
 
     assert_difference "Rpush::Notification.count", 2 do
-      plants(:one).send_watering_reminder
+      Plant.send_watering_reminder_for(users(:one))
     end
   end
 
-  test "send_watering_reminder should not notify when plant was watered recently" do
+  test "send_watering_reminder_for(user) should not notify when plant was watered recently" do
     users(:one).update(subscriptions: [
       { endpoint: "https://example.com/subscription-one", keys: {} },
       { endpoint: "https://example.com/subscription-two", keys: {} }
@@ -33,7 +33,7 @@ class PlantTest < ActiveSupport::TestCase
     plants(:one).update(last_watered_at: Time.current)
 
     assert_no_difference "Rpush::Notification.count" do
-      plants(:one).send_watering_reminder
+      Plant.send_watering_reminder_for(users(:one))
     end
   end
 end

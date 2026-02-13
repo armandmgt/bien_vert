@@ -15,11 +15,15 @@
   </div>
   <div class="flex-none">
 
-    <div class="<%= class_names(
-                      "dropdown static",
-                      "sm:relative sm:dropdown-end"
-                    ) %>">
-      <% plants_needing_watering = Current.user.plants.all.filter(&:needs_watering?) %>
+    <% plants_needing_watering = Current.user.plants.all.filter(&:needs_watering?) %>
+    <div
+      class="<%= class_names(
+                   "dropdown static",
+                   "sm:relative sm:dropdown-end"
+                 ) %>"
+      data-controller="bridge--notification-count"
+      data-bridge--notification-count-count-value="<%= plants_needing_watering.count %>"
+    >
       <button class="btn btn-ghost btn-circle">
         <span class="indicator">
           <%= lucide_icon "bell", class: "size-5" %>
