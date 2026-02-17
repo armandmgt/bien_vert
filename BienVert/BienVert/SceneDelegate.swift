@@ -69,8 +69,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
   @objc private func badgeUpdated(_ notification: Notification) {
     if window?.rootViewController == tabBarController {
-      tabBarController.tabBar.items?[0].badgeValue =
-        "\(notification.object as! Int)"
+      if let badge = notification.object as? Int {
+        if badge == 0 {
+          tabBarController.tabBar.items?[0].badgeValue = nil
+        } else {
+          tabBarController.tabBar.items?[0].badgeValue = "\(badge)"
+        }
+      }
     }
   }
 }

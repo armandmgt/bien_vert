@@ -34,7 +34,7 @@
         Arrosage : <strong>tous les <%= number_to_human plant.watering_frequency %> jours</strong>
       </li>
       <li>
-        Dernier arrosage : <strong><%= l plant.last_watered_at, format: :long %></strong>
+        Dernier arrosage : <strong><%= l plant.last_watered_at, format: :long if plant.last_watered_at.present? %></strong>
       </li>
     </ul>
 
