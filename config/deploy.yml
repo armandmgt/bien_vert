@@ -1,9 +1,11 @@
 service: bien_vert
 image: armandmgt/bien_vert
 servers:
-  web: [ vps.armandmgt.fr ]
+  web:
+    - minipc.armandmgt.fr
   job:
-    hosts: [ vps.armandmgt.fr ]
+    hosts:
+      - minipc.armandmgt.fr
     cmd: bin/jobs
 
 proxy:
@@ -17,7 +19,8 @@ registry:
     - KAMAL_REGISTRY_PASSWORD
 
 builder:
-  arch: arm64
+  arch: amd64
+  remote: ssh://root@minipc.armandmgt.fr
 
 env:
   secret:
@@ -32,7 +35,7 @@ aliases:
 
 
 volumes:
-  - "bien_vert_storage:/rails/storage"
+  - "bien_vert_storage:/rails/storage:z"
 
 
-asset_path: /rails/public/assets
+asset_path: /rails/public/assets:z
