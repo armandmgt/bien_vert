@@ -25,7 +25,10 @@ class PlantsController < ApplicationController
 
   def update
     if @plant.update(plant_params)
-      redirect_to root_path, notice: "Plant was successfully updated.", status: :see_other
+      respond_to do |format|
+        format.html { redirect_to root_path, notice: "Plant was successfully updated.", status: :see_other }
+        format.turbo_stream
+      end
     else
       flash.now[:alert] = "Plant was not updated due to the following errors: #{@plant.errors.full_messages.to_sentence}."
       render :edit, status: :unprocessable_content

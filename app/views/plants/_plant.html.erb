@@ -1,6 +1,6 @@
 <%# locals: (plant:)  %>
 
-<div class="card bg-base-100 shadow-sm not-prose">
+<div id="<%= dom_id plant %>" class="card bg-base-100 shadow-sm not-prose">
   <figure class="relative">
     <% if plant.photo.attached? %>
       <%= image_tag plant.photo, alt: plant.name || dom_id(plant) %>

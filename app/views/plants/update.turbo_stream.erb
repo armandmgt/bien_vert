@@ -1,0 +1,2 @@
+<%= turbo_stream.replace "navbar", partial: "application/navbar" %>
+<%= turbo_stream.replace dom_id(@plant), partial: "plants/plant", locals: { plant: @plant } %>
