@@ -360,6 +360,9 @@ GEM
       faraday (>= 1)
       faraday-multipart (>= 1)
     ruby-progressbar (1.13.0)
+    ruby-vips (2.3.0)
+      ffi (~> 1.12)
+      logger
     rubyzip (3.4.1)
     securerandom (0.4.1)
     selenium-webdriver (4.46.0)
@@ -486,6 +489,7 @@ DEPENDENCIES
   rpush
   rubocop-rails-omakase
   ruby-openai
+  ruby-vips (~> 2.0)
   selenium-webdriver
   solid_cable
   solid_cache
