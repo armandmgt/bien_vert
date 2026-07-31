@@ -13,6 +13,7 @@ gem "puma"
 gem "rails"
 gem "rpush"
 gem "ruby-openai"
+gem "ruby-vips", "~> 2.0"
 gem "solid_cable"
 gem "solid_cache"
 gem "solid_errors", group: :production
