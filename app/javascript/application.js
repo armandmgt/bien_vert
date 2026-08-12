@@ -1,3 +1,6 @@
+import { start as startErrorReporting } from "solid_errors_frontend"
+startErrorReporting()
+
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 import "@hotwired/turbo-rails"
 import "flowbite"
