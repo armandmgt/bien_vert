@@ -90,6 +90,6 @@ Rails.application.configure do
 
   # Configure Solid Errors
   config.solid_errors.connects_to = { database: { writing: :errors } }
-  config.solid_errors.base_controller_class = "ApplicationController"
+  config.solid_errors.base_controller_class = "Admin::AdminController"
   config.solid_errors.destroy_after = 30.days
 end

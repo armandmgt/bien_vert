@@ -37,5 +37,15 @@ Rails.application.routes.draw do
   get "privacy", to: "static#privacy"
   get "support", to: "static#support"
 
-  mount SolidErrors::Engine, at: "/solid_errors" if Rails.env.production?
+  # Ingest endpoint for browser-side errors. Mounted in every environment: the gem
+  # reports through ActiveSupport::ErrorReporter, so outside production (where
+  # solid_errors is not installed) reports still surface in the log.
+  mount SolidErrors::Frontend::Engine, at: "/frontend_errors"
+
+  namespace :admin do
+    # Access is gated by `config.solid_errors.base_controller_class`
+    # (Admin::AdminController), not by this namespace — a mounted engine doesn't
+    # inherit the surrounding scope's filters.
+    mount SolidErrors::Engine, at: "/solid_errors" if Rails.env.production?
+  end
 end

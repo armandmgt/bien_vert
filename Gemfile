@@ -17,6 +17,9 @@ gem "ruby-vips", "~> 2.0"
 gem "solid_cable"
 gem "solid_cache"
 gem "solid_errors", group: :production
+# Not production-only, unlike solid_errors itself: it reports through Rails.error,
+# so in dev the browser errors it catches still surface in the log.
+gem "solid_errors-frontend", "~> 0.1"
 gem "solid_queue"
 gem "sqlite3", ">= 2.1"
 gem "stimulus-rails"
