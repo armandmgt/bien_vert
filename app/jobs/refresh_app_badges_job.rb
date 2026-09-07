@@ -1,6 +1,6 @@
 class RefreshAppBadgesJob < ApplicationJob
   def perform(user)
-    plants_count = user.plants.filter(&:needs_watering?).count
+    plants_count = user.plants.alive.filter(&:needs_watering?).count
     user.subscriptions.each do |subscription|
       if subscription.deep_symbolize_keys in { platform: "ios", deviceToken: device_token }
         Rpush::Apnsp8::Notification.create!(

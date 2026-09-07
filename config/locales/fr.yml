@@ -15,6 +15,7 @@ fr:
         name: Nom
         watering_frequency: Fréquence d’arrosage
         last_watered_at: Dernier arrosage
+        died_at: Date de décès
     errors:
       messages:
         record_invalid: 'La validation a échoué : %{errors}'

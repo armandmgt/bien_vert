@@ -3,7 +3,7 @@
     <h1>Modifier ma plante</h1>
   </header>
 
-  <div id="<%= dom_id(@plant) %>" class="contents">
+  <div id="<%= dom_id(@plant, :edit) %>" class="contents">
     <%= render "form", plant: @plant %>
   </div>
 

@@ -3,12 +3,19 @@
 <div id="<%= dom_id plant %>" class="card bg-base-100 shadow-sm not-prose">
   <figure class="relative">
     <% if plant.photo.attached? %>
-      <%= image_tag plant.photo, alt: plant.name || dom_id(plant) %>
+      <%= image_tag plant.photo, alt: plant.name || dom_id(plant), class: class_names({ "grayscale opacity-60": plant.dead? }) %>
     <% else %>
-      <%= lucide_icon "image-off", class: "size-10" %>
+      <%= lucide_icon "image-off", class: class_names("size-10", { "opacity-60": plant.dead? }) %>
     <% end %>
 
-    <% if plant.needs_watering? %>
+    <% if plant.dead? %>
+      <div class="absolute top-0 left-1">
+        <div class="badge badge-neutral">
+          <%= lucide_icon "skull", class: "size-[1em]" %>
+          Plante morte
+        </div>
+      </div>
+    <% elsif plant.needs_watering? %>
       <div class="absolute top-0 left-1">
         <% badge_color_class, icon =
              case plant.reminder_criticality
@@ -30,6 +37,11 @@
     </h2>
 
     <ul>
+      <% if plant.dead? %>
+        <li>
+          Morte le <strong><%= l plant.died_at.to_date, format: :long %></strong>
+        </li>
+      <% end %>
       <li>
         Arrosage : <strong>tous les <%= number_to_human plant.watering_frequency %> jours</strong>
       </li>
@@ -39,9 +51,11 @@
     </ul>
 
     <div class="card-actions justify-end">
-      <%= button_to plant_path(plant), method: :put, params: { plant: { last_watered_at: Time.current.iso8601 } }, data: { turbo_confirm: "Mettre à jour la plante ?" }, class: "btn btn-primary" do %>
-        Arrosé !
-        <%= lucide_icon "droplets", class: "size-[1.2em]" %>
+      <% unless plant.dead? %>
+        <%= button_to plant_path(plant), method: :put, params: { plant: { last_watered_at: Time.current.iso8601 } }, data: { turbo_confirm: "Mettre à jour la plante ?" }, class: "btn btn-primary" do %>
+          Arrosé !
+          <%= lucide_icon "droplets", class: "size-[1.2em]" %>
+        <% end %>
       <% end %>
 
       <%= link_to edit_plant_path(plant), class: "btn" do %>

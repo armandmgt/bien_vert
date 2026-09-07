@@ -3,13 +3,16 @@ class Plant < ApplicationRecord
   has_one_attached :photo
 
   validates :species, :watering_frequency, presence: true
+
+  scope :alive, -> { where(died_at: nil) }
+
   after_update do
-    RefreshAppBadgesJob.perform_later(user) if saved_change_to_last_watered_at?
+    RefreshAppBadgesJob.perform_later(user) if saved_change_to_last_watered_at? || saved_change_to_died_at?
   end
 
   class << self
     def send_watering_reminder_for(user)
-      plants = user.plants.filter(&:needs_watering?)
+      plants = user.plants.alive.filter(&:needs_watering?)
       return if plants.empty?
 
       plants_count = plants.count
@@ -53,8 +56,16 @@ class Plant < ApplicationRecord
     end
   end
 
-  def needs_watering?
+  def dead?
+    died_at.present?
+  end
+
+  def overdue?
     last_watered_at.nil? || (last_watered_at + watering_frequency.days).past?
+  end
+
+  def needs_watering?
+    !dead? && overdue?
   end
 
   def reminder_criticality

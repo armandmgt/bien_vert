@@ -2,7 +2,7 @@ class PlantsController < ApplicationController
   before_action :set_plant, only: %i[ edit update destroy ]
 
   def index
-    @plants = Current.user.plants.all.sort_by(&:should_water_at)
+    @plants = Current.user.plants.all.sort_by { [ _1.dead? ? 1 : 0, _1.should_water_at ] }
   end
 
   def new
@@ -47,6 +47,6 @@ class PlantsController < ApplicationController
   end
 
   def plant_params
-    params.expect plant: [ :species, :name, :watering_frequency, :last_watered_at ]
+    params.expect plant: [ :species, :name, :watering_frequency, :last_watered_at, :died_at ]
   end
 end

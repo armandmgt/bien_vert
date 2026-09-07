@@ -54,11 +54,40 @@
         </p>
       <% end %>
     </fieldset>
+
+    <% if plant.dead? %>
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend"><%= form.label :died_at %></legend>
+        <div data-controller="datetime-field" class="flex space-x-2">
+          <%= form.datetime_field :died_at, data: { datetime_field_target: "input" }, class: class_names("input", { "input-error": plant.errors.include?(:died_at) }), include_seconds: false %>
+          <button data-action="datetime-field#setNow" type="button" class="btn">
+            Maintenant
+          </button>
+        </div>
+        <% if plant.errors.include?(:died_at) %>
+          <p class="label text-error">
+            <strong>Oups !</strong> <%= plant.errors.full_messages_for(:died_at).to_sentence %>
+          </p>
+        <% end %>
+      </fieldset>
+    <% end %>
   </div>
 
   <%= form.submit "Enregistrer", class: "btn btn-primary" %>
 <% end %>
 
 <% if plant.persisted? %>
+  <% if plant.dead? %>
+    <%= button_to plant_path(plant), method: :put, params: { plant: { died_at: "" } }, data: { turbo_confirm: "Marquer cette plante comme vivante ?" }, form_class: "contents", class: "btn btn-soft btn-success" do %>
+      <%= lucide_icon "sprout", class: "size-[1.2em]" %>
+      Marquer comme vivante
+    <% end %>
+  <% else %>
+    <%= button_to plant_path(plant), method: :put, params: { plant: { died_at: Time.current.iso8601 } }, data: { turbo_confirm: "Marquer cette plante comme morte ?" }, form_class: "contents", class: "btn btn-soft btn-warning" do %>
+      <%= lucide_icon "skull", class: "size-[1.2em]" %>
+      Marquer comme morte
+    <% end %>
+  <% end %>
+
   <%= button_to "Supprimer", plant_path(plant), method: :delete, data: { turbo_confirm: "Supprimer la plante #{plant.name || plant.species} ?" }, form_class: "contents", class: "btn btn-soft btn-error" %>
 <% end %>
