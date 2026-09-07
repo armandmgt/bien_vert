@@ -101,4 +101,20 @@ class PlantsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_predicate @plant.reload, :dead?
   end
+
+  test "edit page save button stays associated with the plant form" do
+    get edit_plant_path(@plant)
+
+    assert_response :success
+    assert_select "form#plant_form[action=?]", plant_path(@plant)
+    assert_select "input[type=submit][form=?]", "plant_form"
+  end
+
+  test "new page save button stays associated with the plant form" do
+    get new_plant_path
+
+    assert_response :success
+    assert_select "form#plant_form[action=?]", plants_path
+    assert_select "input[type=submit][form=?]", "plant_form"
+  end
 end

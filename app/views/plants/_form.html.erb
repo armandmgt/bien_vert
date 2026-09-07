@@ -1,6 +1,6 @@
 <%# locals: (plant:) %>
 
-<%= form_with model: plant, class: "not-prose contents" do |form| %>
+<%= form_with model: plant, id: "plant_form", class: "not-prose contents" do |form| %>
   <div class="max-w-sm min-h-40 flex justify-center items-center">
     <% if plant.photo.attached? %>
       <%= image_tag plant.photo, class: "rounded-lg", alt: plant.name || dom_id(plant) %>
@@ -72,22 +72,26 @@
       </fieldset>
     <% end %>
   </div>
-
-  <%= form.submit "Enregistrer", class: "btn btn-primary" %>
 <% end %>
 
-<% if plant.persisted? %>
-  <% if plant.dead? %>
-    <%= button_to plant_path(plant), method: :put, params: { plant: { died_at: "" } }, data: { turbo_confirm: "Marquer cette plante comme vivante ?" }, form_class: "contents", class: "btn btn-soft btn-success" do %>
-      <%= lucide_icon "sprout", class: "size-[1.2em]" %>
-      Marquer comme vivante
+<%# The forms above and below are display:contents, so their buttons land in this
+    one flex row: a single line on wide screens, evenly gapped when it wraps. %>
+<div class="not-prose flex flex-wrap items-center gap-2">
+  <%= submit_tag "Enregistrer", form: "plant_form", class: "btn btn-primary" %>
+
+  <% if plant.persisted? %>
+    <% if plant.dead? %>
+      <%= button_to plant_path(plant), method: :put, params: { plant: { died_at: "" } }, data: { turbo_confirm: "Marquer cette plante comme vivante ?" }, form_class: "contents", class: "btn btn-soft btn-success" do %>
+        <%= lucide_icon "sprout", class: "size-[1.2em]" %>
+        Marquer comme vivante
+      <% end %>
+    <% else %>
+      <%= button_to plant_path(plant), method: :put, params: { plant: { died_at: Time.current.iso8601 } }, data: { turbo_confirm: "Marquer cette plante comme morte ?" }, form_class: "contents", class: "btn btn-soft btn-warning" do %>
+        <%= lucide_icon "skull", class: "size-[1.2em]" %>
+        Marquer comme morte
+      <% end %>
     <% end %>
-  <% else %>
-    <%= button_to plant_path(plant), method: :put, params: { plant: { died_at: Time.current.iso8601 } }, data: { turbo_confirm: "Marquer cette plante comme morte ?" }, form_class: "contents", class: "btn btn-soft btn-warning" do %>
-      <%= lucide_icon "skull", class: "size-[1.2em]" %>
-      Marquer comme morte
-    <% end %>
+
+    <%= button_to "Supprimer", plant_path(plant), method: :delete, data: { turbo_confirm: "Supprimer la plante #{plant.name || plant.species} ?" }, form_class: "contents", class: "btn btn-soft btn-error" %>
   <% end %>
-
-  <%= button_to "Supprimer", plant_path(plant), method: :delete, data: { turbo_confirm: "Supprimer la plante #{plant.name || plant.species} ?" }, form_class: "contents", class: "btn btn-soft btn-error" %>
-<% end %>
+</div>
