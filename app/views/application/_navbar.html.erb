@@ -16,7 +16,7 @@
   </div>
   <div class="flex-none">
 
-    <% plants_needing_watering = Current.user.plants.all.filter(&:needs_watering?) %>
+    <% plants_needing_watering = Current.user.plants.alive.filter(&:needs_watering?) %>
     <div
       id="notification-dropdown"
       class="<%= class_names(
